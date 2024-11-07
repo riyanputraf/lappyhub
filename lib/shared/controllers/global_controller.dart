@@ -48,6 +48,7 @@ class GlobalController extends GetxController {
         statusLocation.value = 'success';
 
         await Future.delayed(const Duration(seconds: 1));
+        ///navigasi ke halaman splash
         Get.until(ModalRoute.withName(Routes.splashRoute));
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
