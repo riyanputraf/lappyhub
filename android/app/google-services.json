@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "947396334295",
+    "project_id": "lappyhub-db2b0",
+    "storage_bucket": "lappyhub-db2b0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947396334295:android:4709bcfc7aca4ca66fd692",
+        "android_client_info": {
+          "package_name": "com.example.lappyhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYno6RRjxMHV3LNZww4SjcHCeATjGy7O8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
