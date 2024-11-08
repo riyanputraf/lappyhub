@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import '../../constants/app_constant.dart';
+import '../../features/search_location/models/location_model.dart';
 
 class LocationServices {
   /// Memastikan class ini tidak bisa diinstansiasi
@@ -91,31 +92,3 @@ class LocationServices {
   }
 }
 
-class LocationResult {
-  final bool success;
-  final Position? position;
-  final String? address;
-  final String? message;
-
-  LocationResult({
-    required this.success,
-    this.position,
-    this.address,
-    this.message,
-  });
-
-  factory LocationResult.success({required Position position, required String address}) {
-    return LocationResult(
-      success: true,
-      position: position,
-      address: address,
-    );
-  }
-
-  factory LocationResult.error({required String message}) {
-    return LocationResult(
-      success: false,
-      message: message,
-    );
-  }
-}
