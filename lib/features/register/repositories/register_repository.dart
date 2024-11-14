@@ -8,14 +8,14 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../../../utils/services/dio_service.dart';
 import '../constants/register_api_constant.dart';
-import '../constants/register_assets_constant.dart';
 import '../models/user_model.dart';
 
 class RegisterRepository {
   RegisterRepository._();
 
   var apiConstant = RegisterApiConstant();
-  final assetsConstant = RegisterAssetsConstant();
+  final String avatarDefault =
+      'https://cloud.appwrite.io/v1/storage/buckets/6735a8d90010245cb0da/files/67361639000b2b9e515c/view?project=67318161002f57a70dd5&project=67318161002f57a70dd5&mode=admin';
   late final Dio dio;
 
   RegisterRepository() {
@@ -52,7 +52,7 @@ class RegisterRepository {
         name: name,
         pin: pin,
         password: password,
-        avatar: assetsConstant.personIcon, // URL avatar default
+        avatar: avatarDefault, // URL avatar default
       );
 
       // Kirim data ke MockAPI menggunakan POST
@@ -71,7 +71,6 @@ class RegisterRepository {
         Get.snackbar("Error", "Failed to register user");
         return null;
       }
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         Get.snackbar(
@@ -81,7 +80,6 @@ class RegisterRepository {
           duration: Duration(seconds: 4),
         );
         return null;
-
       } else if (e.code == 'weak-password') {
         Get.snackbar(
           "Error",
@@ -89,7 +87,6 @@ class RegisterRepository {
           backgroundColor: ColorStyle.danger,
         );
         return null;
-
       } else if (e.code == 'email-already-in-use') {
         Get.snackbar(
           "Error",
@@ -101,7 +98,6 @@ class RegisterRepository {
 
       log(e.toString());
       return null;
-
     } catch (exception, stackTrace) {
       await Sentry.captureException(
         exception,

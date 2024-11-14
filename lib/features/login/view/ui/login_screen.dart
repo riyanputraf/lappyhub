@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lappyhub/features/login/controllers/login_controller.dart';
 import 'package:lappyhub/features/login/view/components/footer_login_component.dart';
 import 'package:lappyhub/features/login/view/components/form_login_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
@@ -47,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                 30.verticalSpace,
                 ButtonPrimaryCustom(
                   text: 'Login Akun',
-                  onTap: () {},
+                  onTap: () => LoginController.to.login(context),
                 ),
               ],
             ),
