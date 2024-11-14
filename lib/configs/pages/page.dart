@@ -25,11 +25,13 @@ abstract class Pages {
       name: Routes.loginRoute,
       page: () => LoginScreen(),
       binding: LoginBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: Routes.registerRoute,
       page: () => RegisterScreen(),
       binding: RegisterBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lappyhub/features/login/view/components/footer_login_component.dart';
-import 'package:lappyhub/features/login/view/components/form_login_component.dart';
+import 'package:lappyhub/features/register/view/components/footer_register_component.dart';
+import 'package:lappyhub/features/register/view/components/form_register_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
 
 import '../../../../shared/styles/google_text_style.dart';
-import '../../constants/login_assets_constant.dart';
+import '../../constants/register_assets_constant.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  RegisterScreen({Key? key}) : super(key: key);
 
-  final assetsConstant = LoginAssetsConstant();
+  final assetsConstant = RegisterAssetsConstant();
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +36,24 @@ class LoginScreen extends StatelessWidget {
                 ),
                 50.verticalSpace,
                 Text(
-                  'Login Akun',
+                  'Daftar Akun',
                   style: GoogleTextStyle.fw700.copyWith(
                     color: ColorStyle.dark,
                     fontSize: 24.sp,
                   ),
                 ),
                 30.verticalSpace,
-                FormLoginComponent(),
+                FormRegisterComponent(),
                 30.verticalSpace,
                 ButtonPrimaryCustom(
-                  text: 'Login Akun',
+                  text: 'Buat Akun Baru',
                   onTap: () {},
                 ),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: FooterLoginComponent(),
+        bottomNavigationBar: FooterRegisterComponent(),
       ),
     );
   }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lappyhub/shared/styles/color_style.dart';
-import 'package:lappyhub/shared/styles/google_text_style.dart';
+import 'package:get/get.dart';
 
-class FooterComponent extends StatelessWidget {
-  const FooterComponent({super.key});
+import '../../../../configs/routes/route.dart';
+import '../../../../shared/styles/color_style.dart';
+import '../../../../shared/styles/google_text_style.dart';
+
+class FooterRegisterComponent extends StatelessWidget {
+  const FooterRegisterComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class FooterComponent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Belum punya akun? ',
+            'Sudah punya akun? ',
             style: GoogleTextStyle.fw400.copyWith(
               fontSize: 16.sp,
               color: ColorStyle.dark,
@@ -22,10 +25,10 @@ class FooterComponent extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-
+              Get.offNamed(Routes.loginRoute);
             },
             child: Text(
-              'Register',
+              'Login',
               style: GoogleTextStyle.fw500.copyWith(
                 fontSize: 16.sp,
                 color: ColorStyle.primary,
