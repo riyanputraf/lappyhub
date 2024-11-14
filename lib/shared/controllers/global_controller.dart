@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:lappyhub/configs/routes/route.dart';
 import 'package:lappyhub/features/search_location/view/ui/search_location_screen.dart';
 
+import '../../features/splash/controllers/splash_controller.dart';
 import '../../utils/services/location_service.dart';
 
 class GlobalController extends GetxController {
@@ -50,6 +51,7 @@ class GlobalController extends GetxController {
         await Future.delayed(const Duration(seconds: 1));
         ///navigasi ke halaman splash
         Get.until(ModalRoute.withName(Routes.splashRoute));
+        SplashController.to.navigateToLogin();
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
         statusLocation.value = 'error';
