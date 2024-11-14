@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lappyhub/features/register/controllers/register_controller.dart';
 import 'package:lappyhub/features/register/view/components/footer_register_component.dart';
 import 'package:lappyhub/features/register/view/components/form_register_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
@@ -47,7 +48,7 @@ class RegisterScreen extends StatelessWidget {
                 30.verticalSpace,
                 ButtonPrimaryCustom(
                   text: 'Buat Akun Baru',
-                  onTap: () {},
+                  onTap: () => RegisterController.to.register(context),
                 ),
               ],
             ),

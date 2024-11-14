@@ -4,6 +4,7 @@ import 'package:flutter_conditional_rendering/conditional_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/shared/controllers/global_controller.dart';
+import 'package:lappyhub/shared/styles/google_text_style.dart';
 
 import '../../../../shared/styles/color_style.dart';
 import '../../constants/search_location_assets_constant.dart';
@@ -27,8 +28,11 @@ class SearchLocationScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Searching location...'.tr,
-                style: Get.textTheme.titleLarge,
+                'Mencari Lokasimu...'.tr,
+                style: GoogleTextStyle.fw400.copyWith(
+                  fontSize: 22.sp,
+                  color: ColorStyle.grey,
+                ),
                 textAlign: TextAlign.center,
               ),
               50.verticalSpacingRadius,
@@ -93,7 +97,10 @@ class SearchLocationScreen extends StatelessWidget {
                     ),
                     'success': (context) => Text(
                       GlobalController.to.address.value!,
-                      style: Get.textTheme.titleLarge,
+                      style: GoogleTextStyle.fw600.copyWith(
+                        fontSize: 22.sp,
+                        color: ColorStyle.dark,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   },

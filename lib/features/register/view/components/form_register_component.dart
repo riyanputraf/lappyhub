@@ -42,6 +42,17 @@ class FormRegisterComponent extends StatelessWidget {
             requiredText: 'Email address cannot be empty',
           ),
           20.verticalSpace,
+          TextFormFieldCustom(
+            icon: assetsConstant.pinIcon,
+            controller: RegisterController.to.pinController,
+            keyboardType: TextInputType.emailAddress,
+            initialValue: RegisterController.to.pinValue.value,
+            label: 'PIN Anda',
+            hint: 'PIN',
+            isRequired: true,
+            requiredText: 'PIN cannot be empty',
+          ),
+          20.verticalSpace,
           Obx(
             () => TextFormFieldCustom(
               icon: assetsConstant.passwordIcon,

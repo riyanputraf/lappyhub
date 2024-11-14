@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:lappyhub/shared/controllers/global_controller.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class DioService {
   DioService._();
@@ -12,85 +13,61 @@ class DioService {
     return dioService;
   }
 
-  static const int timeoutInMiliSeconds = 60000;
+  static const Duration timeoutInMiliSeconds = Duration(
+    seconds: 20000,
+  );
 
   static Dio dioCall({
-    bool isSignature = true,
-    bool isMockApi = false,
-    String? tempToken,
-    int timeout = timeoutInMiliSeconds,
-    bool isNoTimeOut = false,
-    bool isV2 = false,
+    Duration timeout = timeoutInMiliSeconds,
+    String? token,
+    String? authorization,
   }) {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    if (token != null) {
+      headers['token'] = token;
+    }
+
+    if (authorization != null) {
+      headers['Authorization'] = authorization;
+    }
+
     var dio = Dio(
       BaseOptions(
-        baseUrl: "https://venturo.id/",
-        connectTimeout: const Duration(milliseconds: 5000),
+        headers: headers,
+        baseUrl: GlobalController.to.baseUrl,
+        connectTimeout: timeoutInMiliSeconds,
+        contentType: 'application/json',
         responseType: ResponseType.json,
-        sendTimeout: isNoTimeOut ? null : Duration(milliseconds: timeout),
-        receiveTimeout: isNoTimeOut ? null : Duration(milliseconds: timeout),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
       ),
     );
 
-    dio.interceptors.add(_authInterceptor(
-      isSignature: isSignature,
-      tempToken: tempToken,
-    ));
+    dio.interceptors.add(_authInterceptor());
 
     return dio;
   }
 
-  static Interceptor _authInterceptor({
-    bool isSignature = true,
-    String? tempToken,
-  }) {
+  static Interceptor _authInterceptor() {
     return QueuedInterceptorsWrapper(
-      onRequest: (reqOptions, handler) async {
-        final isConnect = await GlobalController.to.checkConnection();
-        if (!isConnect) {
-          return handler.reject(DioException.connectionError(
-              requestOptions: reqOptions,
-              reason: "Check Your Connection",
-              error: {"message": "Check your internet connection"}));
-        }
-
+      onRequest: (reqOptions, handler) {
         log('${reqOptions.uri}', name: 'REQUEST URL');
         log('${reqOptions.headers}', name: 'HEADER');
-        log('${reqOptions.data}', name: 'DATA');
 
         return handler.next(reqOptions);
       },
       onError: (error, handler) async {
+        log(error.message.toString(), name: 'ERROR MESSAGE');
         log('${error.response}', name: 'RESPONSE');
-        log('${error.response?.statusCode}', name: 'STATUS CODE');
-        log('${error.requestOptions.uri}', name: 'ERROR FROM URL');
+        await Sentry.captureException(
+          error,
+        );
 
-        if (error.response?.statusCode == 401) {
-          /// TODO : Handle your 401 status code
-
-          return;
-        }
-        if (error.response?.statusCode == 403) {
-          /// TODO : Handle your 403 status code
-          return;
-        }
-        if (error.response?.statusCode == 503 ||
-            error.response?.statusCode == 531 ||
-            error.response?.statusCode == 520 ||
-            error.response?.statusCode == 521 ||
-            error.response?.statusCode == 523) {
-          /// TODO : Handle your 500 ish status code
-          return;
-        }
-
-        return handler.next(error); //return non 401 error
+        return handler.next(error);
       },
       onResponse: (response, handler) async {
-        log('${response.requestOptions.uri}', name: 'RESPONSE FROM URL');
         log('${response.data}', name: 'RESPONSE');
 
         return handler.resolve(response);

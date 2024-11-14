@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/shared/bindings/global_binding.dart';
@@ -24,6 +25,8 @@ void main() async {
         options: DefaultFirebaseOptions.currentPlatform,
       );
 
+      configLoading();
+
       /// Change your options.dns with your project !!!!
       await SentryFlutter.init(
         (options) {
@@ -40,6 +43,22 @@ void main() async {
       Sentry.captureException(error, stackTrace: stack);
     },
   );
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.white
+    ..backgroundColor = Colors.blue
+    ..indicatorColor = Colors.white
+    ..textColor = Colors.white
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
 }
 
 class MyApp extends StatelessWidget {
@@ -72,6 +91,7 @@ class MyApp extends StatelessWidget {
           theme: themeLight,
           defaultTransition: Transition.native,
           getPages: Pages.pages,
+          builder: EasyLoading.init(),
         );
       },
     );
