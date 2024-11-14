@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:lappyhub/features/register/repositories/register_repository.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 
+import '../view/components/pin_register_dialog_component.dart';
+
 
 class RegisterController extends GetxController {
   static RegisterController get to => Get.find();
@@ -34,6 +36,19 @@ class RegisterController extends GetxController {
       isPassword.value = false;
     } else {
       isPassword.value = true;
+    }
+  }
+
+  Future<void> inputPin() async {
+    String pinInput = await Get.defaultDialog(
+      title: '',
+      titleStyle: const TextStyle(fontSize: 0),
+      radius: 30,
+      content: PinRegisterDialogComponent(pin: pinValue),
+    );
+
+    if (pinInput.isNotEmpty) {
+      pinController.text = pinInput;
     }
   }
 

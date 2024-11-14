@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/features/register/constants/register_assets_constant.dart';
 import 'package:lappyhub/features/register/controllers/register_controller.dart';
+import 'package:lappyhub/shared/widgets/input_dialog_custom.dart';
 
 import '../../../../shared/styles/color_style.dart';
 import '../../../../shared/widgets/text_form_custom.dart';
@@ -42,15 +43,16 @@ class FormRegisterComponent extends StatelessWidget {
             requiredText: 'Email address cannot be empty',
           ),
           20.verticalSpace,
-          TextFormFieldCustom(
+          InputDialogCustom(
             icon: assetsConstant.pinIcon,
+            hint: 'PIN',
             controller: RegisterController.to.pinController,
             keyboardType: TextInputType.emailAddress,
-            initialValue: RegisterController.to.pinValue.value,
-            label: 'PIN Anda',
-            hint: 'PIN',
             isRequired: true,
             requiredText: 'PIN cannot be empty',
+            label: 'PIN Anda',
+            enable: false,
+            onTapBox: () => RegisterController.to.inputPin(),
           ),
           20.verticalSpace,
           Obx(
