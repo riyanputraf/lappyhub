@@ -25,6 +25,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorStyle.softGrey,
       extendBody: true,
       body: Obx(
         () => IndexedStack(

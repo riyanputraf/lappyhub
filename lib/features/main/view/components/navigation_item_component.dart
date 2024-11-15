@@ -45,7 +45,7 @@ class NavigationItemComponent extends StatelessWidget {
                     label,
                     style: GoogleTextStyle.fw600.copyWith(
                       fontSize: 12.sp,
-                      color: isActive ? ColorStyle.primary : ColorStyle.grey
+                      color: isActive ? ColorStyle.secondary : ColorStyle.grey
                     )
                   ),
                   if (hasDot)
