@@ -10,31 +10,48 @@ class HomeController extends GetxController {
   final assetsConstant = HomeAssetsConstant();
 
   List<Map<String, String>> get categories => [
-    {'name': 'Asus', 'icon': assetsConstant.asusIcon},
-    {'name': 'Apple', 'icon': assetsConstant.appleIcon},
-    {'name': 'Acer', 'icon': assetsConstant.acerIcon},
-  ];
+        {'name': 'Asus', 'icon': assetsConstant.asusIcon},
+        {'name': 'Apple', 'icon': assetsConstant.appleIcon},
+        {'name': 'Acer', 'icon': assetsConstant.acerIcon},
+      ];
 
   late final HomeRepository homeRepository;
-  var laptops = <LaptopModel>[].obs;
-  var isLoading = 'loading'.obs;
+
+  var popularLaptops = <LaptopModel>[].obs;
+  var listLaptops = <LaptopModel>[].obs;
+
+  var isLoadingPopularLaptops = 'loading'.obs;
+  var isLoadingLaptops = 'loading'.obs;
 
   @override
   void onInit() {
     super.onInit();
     homeRepository = HomeRepository();
-    fetchLaptops();
+    fetchPopularLaptops();
+    fetchListLaptops();
   }
 
-  Future<void> fetchLaptops() async {
+  Future<void> fetchPopularLaptops() async {
     try {
-      isLoading.value = 'loading';
-      final data = await homeRepository.fetchLaptops();
-      laptops.value = data;
+      isLoadingPopularLaptops.value = 'loading';
+      final data = await homeRepository.fetchPopularLaptops();
+      popularLaptops.value = data;
     } catch (e) {
       Get.snackbar('Error', 'Failed to fetch laptops');
     } finally {
-      isLoading.value = 'success';
+      isLoadingPopularLaptops.value = 'success';
+    }
+  }
+
+  Future<void> fetchListLaptops() async {
+    try {
+      isLoadingLaptops.value = 'loading';
+      final data = await homeRepository.fetchListLaptops();
+      listLaptops.value = data;
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to fetch laptops');
+    } finally {
+      isLoadingLaptops.value = 'success';
     }
   }
 }

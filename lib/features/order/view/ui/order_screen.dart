@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lappyhub/shared/styles/color_style.dart';
 
 import '../../constants/order_assets_constant.dart';
 
@@ -9,10 +10,6 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Pesanan'),
-      ),
-    );
+    return const Center(child: Text('Orders'));
   }
 }

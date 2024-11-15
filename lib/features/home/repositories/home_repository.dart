@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -19,7 +18,7 @@ class HomeRepository {
     dio = DioService.dioCall();
   }
 
-  Future<List<LaptopModel>> fetchLaptops() async {
+  Future<List<LaptopModel>> fetchPopularLaptops() async {
     try {
       final response = await dio.get('/laptops');
 
@@ -34,7 +33,32 @@ class HomeRepository {
         );
         throw Exception('Failed to fetch laptops');
       }
+    } catch (exception, stackTrace) {
+      log('Fetch Error: ${exception.toString()}');
+      log('Stack Trace: ${stackTrace.toString()}');
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+      throw Exception('Error fetching laptops: $exception');
+    }
+  }
 
+  Future<List<LaptopModel>> fetchListLaptops() async {
+    try {
+      final response = await dio.get('/laptops');
+
+      if (response.statusCode == 200) {
+        return (response.data['data'] as List)
+            .map((json) => LaptopModel.fromJson(json))
+            .toList();
+      } else {
+        log('Fetch Error: Status Code ${response.statusCode}');
+        await Sentry.captureException(
+          response.statusCode,
+        );
+        throw Exception('Failed to fetch laptops');
+      }
     } catch (exception, stackTrace) {
       log('Fetch Error: ${exception.toString()}');
       log('Stack Trace: ${stackTrace.toString()}');

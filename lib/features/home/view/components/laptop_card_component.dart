@@ -1,48 +1,46 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lappyhub/features/home/models/laptop_model.dart';
 import 'package:lappyhub/shared/styles/google_text_style.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../shared/styles/color_style.dart';
 import '../../../../shared/widgets/currency_format_custom.dart';
-import '../../models/laptop_model.dart';
 
-class PopularLaptopCardComponent extends StatelessWidget {
-  final LaptopModel laptop;
-
-  const PopularLaptopCardComponent({
-    Key? key,
+class LaptopCardComponent extends StatelessWidget {
+  const LaptopCardComponent({
+    super.key,
     required this.laptop,
-  }) : super(key: key);
+  });
+
+  final LaptopModel laptop;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 16.w),
-      width: 252.w,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+      height: 98.h,
+      margin: EdgeInsets.only(bottom: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorStyle.white,
         borderRadius: BorderRadius.circular(16.r),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(16.r),
             child: CachedNetworkImage(
               imageUrl: laptop.image,
-              height: 130.h,
-              width: double.infinity,
+              height: 70.h,
+              width: 90.w,
               fit: BoxFit.cover,
               placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
                 child: Container(
-                  width: double.infinity,
-                  height: 130.h,
+                  width: 90.w,
+                  height: 70.h,
                   decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(16.r),
@@ -55,48 +53,32 @@ class PopularLaptopCardComponent extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      laptop.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleTextStyle.fw600.copyWith(
-                        fontSize: 18.sp,
-                        color: ColorStyle.dark,
-                      )
-                    ),
-                    4.verticalSpace,
-                    Text(
-                      laptop.category,
-                      style: GoogleTextStyle.fw400.copyWith(
-                        fontSize: 14.sp,
-                        color: ColorStyle.grey,
-                      )
-                    ),
-                  ],
-                ),
-              ),
-              RatingBar.builder(
-                initialRating: laptop.rating.toDouble(),
-                itemPadding: const EdgeInsets.all(0),
-                itemSize: 16.r,
-                unratedColor: Colors.grey[300],
-                allowHalfRating: true,
-                itemBuilder: (context, index) => Icon(
-                  Icons.star,
-                  color: ColorStyle.warning,
-                ),
-                ignoreGestures: true,
-                onRatingUpdate: (value) {},
-              ),
-            ],
-          ),
           10.verticalSpace,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  laptop.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleTextStyle.fw600.copyWith(
+                    fontSize: 16.sp,
+                    color: ColorStyle.dark,
+                  )
+                ),
+                4.verticalSpace,
+                Text(
+                  laptop.category,
+                  style: GoogleTextStyle.fw400.copyWith(
+                    fontSize: 14.sp,
+                    color: ColorStyle.grey,
+                  )
+                ),
+              ],
+            ),
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -114,7 +96,7 @@ class PopularLaptopCardComponent extends StatelessWidget {
                 style: GoogleTextStyle.fw400.copyWith(
                   fontSize: 14.sp,
                   color: ColorStyle.grey,
-                ),
+                )
               ),
             ],
           ),
