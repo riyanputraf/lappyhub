@@ -55,7 +55,7 @@ class GlobalController extends GetxController {
         await Future.delayed(const Duration(seconds: 1));
         ///navigasi ke halaman splash
         Get.until(ModalRoute.withName(Routes.splashRoute));
-        SplashController.to.navigateToLogin();
+        SplashController.to.navigateToMain();
       } else {
         /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
         statusLocation.value = 'error';

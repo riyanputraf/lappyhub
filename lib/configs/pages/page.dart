@@ -1,7 +1,17 @@
 import 'package:get/get.dart';
 import 'package:lappyhub/configs/routes/route.dart';
+import 'package:lappyhub/features/chat/bindings/chat_binding.dart';
+import 'package:lappyhub/features/chat/view/ui/chat_screen.dart';
+import 'package:lappyhub/features/home/bindings/home_binding.dart';
+import 'package:lappyhub/features/home/view/ui/home_screen.dart';
 import 'package:lappyhub/features/login/bindings/login_binding.dart';
 import 'package:lappyhub/features/login/view/ui/login_screen.dart';
+import 'package:lappyhub/features/main/bindings/main_binding.dart';
+import 'package:lappyhub/features/main/view/ui/main_screen.dart';
+import 'package:lappyhub/features/order/bindings/order_binding.dart';
+import 'package:lappyhub/features/order/view/ui/order_screen.dart';
+import 'package:lappyhub/features/profile/bindings/profile_binding.dart';
+import 'package:lappyhub/features/profile/view/ui/profile_screen.dart';
 import 'package:lappyhub/features/register/bindings/register_binding.dart';
 import 'package:lappyhub/features/register/view/ui/register_screen.dart';
 import 'package:lappyhub/features/search_location/bindings/search_location_binding.dart';
@@ -31,6 +41,36 @@ abstract class Pages {
       name: Routes.registerRoute,
       page: () => RegisterScreen(),
       binding: RegisterBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.mainRoute,
+      page: () => MainScreen(),
+      binding: MainBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.homeRoute,
+      page: () => HomeScreen(),
+      binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.orderRoute,
+      page: () => OrderScreen(),
+      binding: OrderBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.chatRoute,
+      page: () => ChatScreen(),
+      binding: ChatBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.profileRoute,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding(),
       transition: Transition.fadeIn,
     ),
   ];
