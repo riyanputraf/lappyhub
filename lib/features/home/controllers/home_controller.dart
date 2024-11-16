@@ -91,8 +91,10 @@ class HomeController extends GetxController {
     try {
       currentPage = 1;
       refreshController.resetNoData();
-      await fetchPopularLaptops();
-      await fetchListLaptops(page: 1);
+      await Future.wait([
+        fetchPopularLaptops(),
+        fetchListLaptops(page: 1),
+      ]);
       hasMoreData.value = true; // Reset status data
       isLoadingMore.value = false;
       refreshController.refreshCompleted(); // Selesaikan refresh

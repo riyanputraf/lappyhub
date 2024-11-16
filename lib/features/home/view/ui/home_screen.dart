@@ -20,67 +20,51 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: ColorStyle.softGrey,
       appBar: AppBarComponent(
         logoPath: assetsConstant.lappyHeader,
         icon: assetsConstant.searchIcon,
       ),
-      body: Obx(() {
-        return SmartRefresher(
-          controller: HomeController.to.refreshController,
-          enablePullDown: true,
-          enablePullUp: true,
-          onRefresh: HomeController.to.onRefresh,
-          onLoading: HomeController.to.onLoading,
-          footer: CustomFooter(
-            builder: (BuildContext context, LoadStatus? mode) {
-              Widget body;
-              if (mode == LoadStatus.idle) {
-                body = const Text("Scroll untuk memuat lebih banyak");
-              } else if (mode == LoadStatus.loading) {
-                body = CircularProgressIndicator();
-              } else if (mode == LoadStatus.noMore) {
-                body = const Text("Tidak ada data lagi");
-              } else {
-                body = const Text("Tidak ada data lagi");
-              }
-              return SizedBox(
-                height: 55.0,
-                child: Center(child: body),
-              );
-            },
-          ),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                36.verticalSpace,
+      body: Obx(
+        () {
+          return SmartRefresher(
+            controller: HomeController.to.refreshController,
+            enablePullDown: true,
+            enablePullUp: true,
+            onRefresh: HomeController.to.onRefresh,
+            onLoading: HomeController.to.onLoading,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  36.verticalSpace,
 
-                /// List Kategori
-                SectionHeaderComponent(title: 'Kategori'),
-                CategoryList(),
+                  /// List Kategori
+                  SectionHeaderComponent(title: 'Kategori'),
+                  CategoryList(),
 
-                30.verticalSpace,
+                  30.verticalSpace,
 
-                /// List Laptop Populer (Horizontal Scroll)
-                SectionHeaderComponent(title: 'Populer'),
-                PopularLaptopList(
-                  laptop: HomeController.to.popularLaptops,
-                ),
+                  /// List Laptop Populer (Horizontal Scroll)
+                  SectionHeaderComponent(title: 'Populer'),
+                  PopularLaptopList(
+                    laptop: HomeController.to.popularLaptops,
+                  ),
 
-                30.verticalSpace,
+                  30.verticalSpace,
 
-                /// List Laptop (Vertical Scroll)
-                SectionHeaderComponent(title: 'List Laptop'),
-                LaptopListComponent(
-                  laptop: HomeController.to.listLaptops,
-                ),
-
-              ],
+                  /// List Laptop (Vertical Scroll)
+                  SectionHeaderComponent(title: 'List Laptop'),
+                  LaptopListComponent(
+                    laptop: HomeController.to.listLaptops,
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }
