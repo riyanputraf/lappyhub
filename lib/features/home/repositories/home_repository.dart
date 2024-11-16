@@ -44,9 +44,12 @@ class HomeRepository {
     }
   }
 
-  Future<List<LaptopModel>> fetchListLaptops() async {
+  Future<List<LaptopModel>> fetchListLaptops({int page = 1}) async {
     try {
-      final response = await dio.get('/laptops');
+      final response = await dio.get(
+        '/laptops',
+        queryParameters: {'page': page, 'limit': 5},
+      );
 
       if (response.statusCode == 200) {
         return (response.data['data'] as List)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lappyhub/features/home/controllers/home_controller.dart';
 import 'package:lappyhub/features/home/view/components/app_bar_component.dart';
 import 'package:lappyhub/features/home/view/components/category_list_component.dart';
@@ -7,6 +8,7 @@ import 'package:lappyhub/features/home/view/components/laptop_list_component.dar
 import 'package:lappyhub/features/home/view/components/popular_laptop_list_component.dart';
 import 'package:lappyhub/features/home/view/components/section_header_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../../constants/home_assets_constant.dart';
 
@@ -23,40 +25,62 @@ class HomeScreen extends StatelessWidget {
         logoPath: assetsConstant.lappyHeader,
         icon: assetsConstant.searchIcon,
       ),
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Column(
-          children: [
-            36.verticalSpace,
+      body: Obx(() {
+        return SmartRefresher(
+          controller: HomeController.to.refreshController,
+          enablePullDown: true,
+          enablePullUp: true,
+          onRefresh: HomeController.to.onRefresh,
+          onLoading: HomeController.to.onLoading,
+          footer: CustomFooter(
+            builder: (BuildContext context, LoadStatus? mode) {
+              Widget body;
+              if (mode == LoadStatus.idle) {
+                body = const Text("Scroll untuk memuat lebih banyak");
+              } else if (mode == LoadStatus.loading) {
+                body = CircularProgressIndicator();
+              } else if (mode == LoadStatus.noMore) {
+                body = const Text("Tidak ada data lagi");
+              } else {
+                body = const Text("Tidak ada data lagi");
+              }
+              return SizedBox(
+                height: 55.0,
+                child: Center(child: body),
+              );
+            },
+          ),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                36.verticalSpace,
 
-            ///List Categori
-            SectionHeaderComponent(
-              title: 'Kategori',
-            ),
-            CategoryList(),
+                /// List Kategori
+                SectionHeaderComponent(title: 'Kategori'),
+                CategoryList(),
 
-            30.verticalSpace,
+                30.verticalSpace,
 
-            ///List Laptop Populer
-            SectionHeaderComponent(
-              title: 'Populer',
-            ),
-            PopularLaptopList(
-              laptop: HomeController.to.popularLaptops,
-            ),
+                /// List Laptop Populer (Horizontal Scroll)
+                SectionHeaderComponent(title: 'Populer'),
+                PopularLaptopList(
+                  laptop: HomeController.to.popularLaptops,
+                ),
 
-            30.verticalSpace,
+                30.verticalSpace,
 
-            ///List Laptop
-            SectionHeaderComponent(
-              title: 'List Laptop',
+                /// List Laptop (Vertical Scroll)
+                SectionHeaderComponent(title: 'List Laptop'),
+                LaptopListComponent(
+                  laptop: HomeController.to.listLaptops,
+                ),
+
+              ],
             ),
-            LaptopListComponent(
-              laptop: HomeController.to.listLaptops,
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 }
