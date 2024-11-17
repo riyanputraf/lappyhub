@@ -25,8 +25,7 @@ class HomeController extends GetxController {
 
   var isLoadingPopularLaptops = 'idle'.obs;
   var isLoadingLaptops = 'idle'.obs;
-  // var isLoadingMore = 'idle'.obs;
-  var isLoadingMore = false.obs;
+  var isLoadingMore = 'idle'.obs;
   var currentPage = 1;
 
   // Refresh Controller
@@ -40,11 +39,7 @@ class HomeController extends GetxController {
     fetchListLaptops(page: 1);
   }
 
-  Future<void> refreshData() async {
-    await fetchPopularLaptops();
-    await fetchListLaptops(page: 1);
-  }
-
+  /// Fetch data list popular laptop (Horizontal Scroll)
   Future<void> fetchPopularLaptops() async {
     try {
       isLoadingPopularLaptops.value = 'loading';
@@ -57,6 +52,7 @@ class HomeController extends GetxController {
     }
   }
 
+  /// Fetch data list laptop (Vertical Scroll)
   Future<void> fetchListLaptops({required int page}) async {
     if (isLoadingLaptops.value == 'loading') return;
 
@@ -64,7 +60,7 @@ class HomeController extends GetxController {
       if (page == 1) {
         isLoadingLaptops.value = 'loading';
       } else {
-        isLoadingMore.value = true;
+        isLoadingMore.value = 'loading';
       }
 
       final laptopsData = await homeRepository.fetchListLaptops(page: page);
@@ -76,13 +72,11 @@ class HomeController extends GetxController {
 
       hasMoreData.value = laptopsData.isNotEmpty;
       currentPage = page;
-
+      isLoadingMore.value = 'success';
       isLoadingLaptops.value = 'success';
     } catch (e) {
       isLoadingLaptops.value = 'error';
       Get.snackbar('Error', 'Failed to fetch laptops');
-    } finally {
-      isLoadingMore.value = false;
     }
   }
 
@@ -90,13 +84,13 @@ class HomeController extends GetxController {
   Future<void> onRefresh() async {
     try {
       currentPage = 1;
-      refreshController.resetNoData();
+      refreshController.resetNoData(); // Reset refresh
       await Future.wait([
         fetchPopularLaptops(),
         fetchListLaptops(page: 1),
       ]);
       hasMoreData.value = true; // Reset status data
-      isLoadingMore.value = false;
+      isLoadingMore.value = 'idle';
       refreshController.refreshCompleted(); // Selesaikan refresh
     } catch (e) {
       refreshController.refreshFailed(); // Gagal refresh

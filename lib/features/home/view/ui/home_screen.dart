@@ -29,13 +29,13 @@ class HomeScreen extends StatelessWidget {
       body: Obx(
         () {
           return SmartRefresher(
+            physics: const BouncingScrollPhysics(),
             controller: HomeController.to.refreshController,
             enablePullDown: true,
             enablePullUp: true,
             onRefresh: HomeController.to.onRefresh,
             onLoading: HomeController.to.onLoading,
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   36.verticalSpace,

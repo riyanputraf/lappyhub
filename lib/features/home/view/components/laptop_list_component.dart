@@ -39,7 +39,7 @@ class LaptopListComponent extends StatelessWidget {
                 },
               ),
 
-              if (HomeController.to.isLoadingMore.value) ...[
+              if (HomeController.to.isLoadingMore.value == 'loading') ...[
                 ShimmerLaptopListComponent(height: 98.h)
               ]
             ],
