@@ -4,4 +4,5 @@ class HomeAssetsConstant {
   final String asusIcon = 'assets/icons/asus_icon.svg';
   final String appleIcon = 'assets/icons/apple_icon.svg';
   final String acerIcon = 'assets/icons/acer_icon.svg';
+  final String messageIcon = 'assets/icons/message_icon.svg';
 }

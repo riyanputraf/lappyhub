@@ -1,3 +1,3 @@
 class HomeApiConstant {
-  final String example = 'example';
+  final String laptopEndpoint = '/laptops';
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lappyhub/features/home/view/components/laptop_card_component.dart';
 import 'package:lappyhub/features/home/view/components/shimmer_laptop_list_component.dart';
 
+import '../../../../configs/routes/route.dart';
 import '../../controllers/home_controller.dart';
 import '../../models/laptop_model.dart';
 
@@ -35,10 +36,14 @@ class LaptopListComponent extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: laptop.length,
                 itemBuilder: (context, index) {
-                  return LaptopCardComponent(laptop: laptop[index]);
+                  return LaptopCardComponent(
+                    laptop: laptop[index],
+                    onTap: () {
+                      Get.toNamed('${Routes.homeRoute}/${laptop[index].id}');
+                    },
+                  );
                 },
               ),
-
               if (HomeController.to.isLoadingMore.value == 'loading') ...[
                 ShimmerLaptopListComponent(height: 98.h)
               ]

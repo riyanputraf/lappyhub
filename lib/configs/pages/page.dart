@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:lappyhub/configs/routes/route.dart';
 import 'package:lappyhub/features/chat/bindings/chat_binding.dart';
 import 'package:lappyhub/features/chat/view/ui/chat_screen.dart';
+import 'package:lappyhub/features/home/bindings/detail_laptop_binding.dart';
 import 'package:lappyhub/features/home/bindings/home_binding.dart';
+import 'package:lappyhub/features/home/view/ui/detail_laptop_screen.dart';
 import 'package:lappyhub/features/home/view/ui/home_screen.dart';
 import 'package:lappyhub/features/login/bindings/login_binding.dart';
 import 'package:lappyhub/features/login/view/ui/login_screen.dart';
@@ -53,6 +55,12 @@ abstract class Pages {
       name: Routes.homeRoute,
       page: () => HomeScreen(),
       binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.detailLaptopRoute,
+      page: () => DetailLaptopScreen(),
+      binding: DetailLaptopBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

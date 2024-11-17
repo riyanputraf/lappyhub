@@ -5,6 +5,7 @@ import 'package:lappyhub/features/home/controllers/home_controller.dart';
 import 'package:lappyhub/features/home/view/components/popular_laptop_card_component.dart';
 import 'package:lappyhub/features/home/view/components/shimmer_popular_laptop_component.dart';
 
+import '../../../../configs/routes/route.dart';
 import '../../models/laptop_model.dart';
 
 class PopularLaptopList extends StatelessWidget {
@@ -41,6 +42,9 @@ class PopularLaptopList extends StatelessWidget {
             itemBuilder: (context, index) {
               return PopularLaptopCardComponent(
                 laptop: laptop[index],
+                onTap: (){
+                  Get.toNamed('${Routes.homeRoute}/${laptop[index].id}');
+                },
               );
             },
           ),
