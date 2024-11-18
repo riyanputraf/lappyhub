@@ -5,10 +5,11 @@ import 'package:intl/intl.dart';
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find();
 
-  var edtStartDate = TextEditingController();
-  var edtEndDate = TextEditingController();
+  var startDateController = TextEditingController();
+  var endDateController = TextEditingController();
 
-  var edtPayment = TextEditingController();
+  var paymentController = TextEditingController();
+  final RxString selectedPaymentMethod = ''.obs;
 
   final Rxn<DateTime> startDate = Rxn<DateTime>();
   final Rxn<DateTime> endDate = Rxn<DateTime>();
@@ -37,6 +38,11 @@ class CheckoutController extends GetxController {
     laptopPrice.value = int.parse(Get.arguments['laptopPrice']);
   }
 
+  void updateSelectedPayment(String paymentMethod) {
+    selectedPaymentMethod.value = paymentMethod;
+    paymentController.text = paymentMethod;
+  }
+
   /// Fungsi untuk menghitung sub total harga
   void calculateSubTotal() {
     subTotalPrice.value = laptopPrice.value * durationDays.value;
@@ -58,7 +64,7 @@ class CheckoutController extends GetxController {
   /// Fungsi untuk memilih tanggal
   Future<void> pickDate(TextEditingController editingController, bool isStartDate) async {
     final pickedDate = await showDatePicker(
-      context: Get.context!, // Gunakan `Get.context` untuk akses kontekstual
+      context: Get.context!,
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 30)),
       initialDate: DateTime.now(),
@@ -71,7 +77,8 @@ class CheckoutController extends GetxController {
       } else {
         endDate.value = pickedDate;
       }
-      calculateDuration(); // Hitung durasi setelah update tanggal
+      // Hitung durasi setelah update tanggal
+      calculateDuration();
     }
   }
 
@@ -86,7 +93,8 @@ class CheckoutController extends GetxController {
         grandTotalPrice.value = 0;
         return;
       }
-      durationDays.value = endDate.value!.difference(startDate.value!).inDays + 1; // Termasuk hari pertama
+      // Termasuk hari pertama
+      durationDays.value = endDate.value!.difference(startDate.value!).inDays + 1;
       calculateSubTotal();
     }
   }

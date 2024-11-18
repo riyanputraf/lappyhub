@@ -92,7 +92,7 @@ class DropdownRentNeedComponent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.r),
                   borderSide: BorderSide(
                     width: 2,
-                    color: ColorStyle.primary,
+                    color: Colors.transparent,
                   ),
                 ),
               ),

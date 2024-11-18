@@ -12,6 +12,7 @@ import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
 
+import '../../../../configs/routes/route.dart';
 import '../../constants/checkout_assets_constant.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -41,12 +42,12 @@ class CheckoutScreen extends StatelessWidget {
             20.verticalSpace,
             ChooseDateComponent(
               icon: assetsConstant.calendarIcon,
-              hint: 'Pilih tanggal',
+              hint: 'Pilih tanggal mulai',
               label: 'Tanggal Mulai Sewa',
-              controller: CheckoutController.to.edtStartDate,
+              controller: CheckoutController.to.startDateController,
               onTap: () {
                 CheckoutController.to.pickDate(
-                  CheckoutController.to.edtStartDate,
+                  CheckoutController.to.startDateController,
                   true,
                 );
               },
@@ -54,12 +55,12 @@ class CheckoutScreen extends StatelessWidget {
             20.verticalSpace,
             ChooseDateComponent(
               icon: assetsConstant.calendarIcon,
-              hint: 'Pilih tanggal',
+              hint: 'Pilih tanggal akhir',
               label: 'Tanggal Akhir Sewa',
-              controller: CheckoutController.to.edtEndDate,
+              controller: CheckoutController.to.endDateController,
               onTap: () {
                 CheckoutController.to.pickDate(
-                  CheckoutController.to.edtEndDate,
+                  CheckoutController.to.endDateController,
                   false,
                 );
               },
@@ -81,8 +82,13 @@ class CheckoutScreen extends StatelessWidget {
               icon: assetsConstant.paymentIcon,
               hint: 'Pilih Metode Pembayaran',
               label: 'Metode Pembayaran',
-              controller: CheckoutController.to.edtPayment,
-              onTap: (){},
+              controller: CheckoutController.to.paymentController,
+              onTap: () => Get.toNamed(
+                Routes.checkoutPaymentRoute,
+                arguments: {
+                  'laptop': laptop,
+                },
+              ),
             ),
             20.verticalSpace,
             Obx(

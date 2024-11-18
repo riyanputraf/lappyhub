@@ -3,6 +3,8 @@ import 'package:lappyhub/configs/routes/route.dart';
 import 'package:lappyhub/features/chat/bindings/chat_binding.dart';
 import 'package:lappyhub/features/chat/view/ui/chat_screen.dart';
 import 'package:lappyhub/features/checkout/bindings/checkout_binding.dart';
+import 'package:lappyhub/features/checkout/sub_features/payment/bindings/payment_binding.dart';
+import 'package:lappyhub/features/checkout/sub_features/payment/view/ui/payment_screen.dart';
 import 'package:lappyhub/features/checkout/view/ui/checkout_screen.dart';
 import 'package:lappyhub/features/home/bindings/detail_laptop_binding.dart';
 import 'package:lappyhub/features/home/bindings/home_binding.dart';
@@ -87,6 +89,12 @@ abstract class Pages {
       name: Routes.checkoutRoute,
       page: () => CheckoutScreen(),
       binding: CheckoutBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.checkoutPaymentRoute,
+      page: () => PaymentScreen(),
+      binding: PaymentBinding(),
       transition: Transition.fadeIn,
     ),
   ];

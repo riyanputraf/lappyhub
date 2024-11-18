@@ -10,4 +10,5 @@ abstract class Routes {
   static const String chatRoute = '/chat';
   static const String profileRoute = '/profile';
   static const String checkoutRoute = '/checkout';
+  static const String checkoutPaymentRoute = '/checkout_payment';
 }
