@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../shared/styles/color_style.dart';
-import '../../../../shared/styles/google_text_style.dart';
+import '../styles/color_style.dart';
+import '../styles/google_text_style.dart';
 
-class SectionHeaderComponent extends StatelessWidget {
-  const SectionHeaderComponent({
+class SectionHeaderCustom extends StatelessWidget {
+  const SectionHeaderCustom({
     super.key,
     required this.title,
   });

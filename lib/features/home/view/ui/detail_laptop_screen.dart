@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/features/home/controllers/detail_laptop_controller.dart';
-import 'package:lappyhub/features/home/view/components/detail_laptop_components/app_bar_custom.dart';
+import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/features/home/view/components/detail_laptop_components/chat_button_component.dart';
 import 'package:lappyhub/features/home/view/components/detail_laptop_components/header_detail_laptop_component.dart';
 import 'package:lappyhub/features/home/view/components/detail_laptop_components/image_laptop_component.dart';
@@ -10,6 +10,7 @@ import 'package:lappyhub/features/home/view/components/detail_laptop_components/
 import 'package:lappyhub/features/home/view/components/detail_laptop_components/specification_laptop_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 
+import '../../../../configs/routes/route.dart';
 import '../../constants/home_assets_constant.dart';
 
 class DetailLaptopScreen extends StatelessWidget {
@@ -64,6 +65,15 @@ class DetailLaptopScreen extends StatelessWidget {
                 20.verticalSpace,
                 RentButtonComponent(
                   laptop: laptop,
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.checkoutRoute,
+                      arguments: {
+                        'laptop': laptop,
+                        'laptopPrice': laptop.price,
+                      },
+                    );
+                  },
                 ),
                 10.verticalSpace,
                 ChatButtonComponent(

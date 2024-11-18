@@ -6,7 +6,7 @@ import 'package:lappyhub/features/home/view/components/app_bar_component.dart';
 import 'package:lappyhub/features/home/view/components/category_list_component.dart';
 import 'package:lappyhub/features/home/view/components/laptop_list_component.dart';
 import 'package:lappyhub/features/home/view/components/popular_laptop_list_component.dart';
-import 'package:lappyhub/features/home/view/components/section_header_component.dart';
+import 'package:lappyhub/shared/widgets/section_header_custom.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
@@ -41,13 +41,13 @@ class HomeScreen extends StatelessWidget {
                   36.verticalSpace,
 
                   /// List Kategori
-                  SectionHeaderComponent(title: 'Kategori'),
+                  SectionHeaderCustom(title: 'Kategori'),
                   CategoryList(),
 
                   30.verticalSpace,
 
                   /// List Laptop Populer (Horizontal Scroll)
-                  SectionHeaderComponent(title: 'Populer'),
+                  SectionHeaderCustom(title: 'Populer'),
                   PopularLaptopList(
                     laptop: HomeController.to.popularLaptops,
                   ),
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                   30.verticalSpace,
 
                   /// List Laptop (Vertical Scroll)
-                  SectionHeaderComponent(title: 'List Laptop'),
+                  SectionHeaderCustom(title: 'List Laptop'),
                   LaptopListComponent(
                     laptop: HomeController.to.listLaptops,
                   ),

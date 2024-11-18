@@ -11,9 +11,11 @@ class RentButtonComponent extends StatelessWidget {
   const RentButtonComponent({
     super.key,
     required this.laptop,
+    required this.onTap,
   });
 
   final LaptopDetailModel laptop;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class RentButtonComponent extends StatelessWidget {
               width: 160.w,
               child: ButtonPrimaryCustom(
                 text: 'Sewa Sekarang',
-                onTap: () {},
+                onTap: onTap,
               ),
             ),
           ],
