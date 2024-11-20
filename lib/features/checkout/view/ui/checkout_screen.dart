@@ -61,8 +61,18 @@ class CheckoutScreen extends StatelessWidget {
               },
             ),
             20.verticalSpace,
+            PaymentMethodComponent(
+              icon: assetsConstant.paymentIcon,
+              hint: 'Pilih Metode Pembayaran',
+              label: 'Metode Pembayaran',
+              controller: CheckoutController.to.paymentController,
+              onTap: () => Get.toNamed(
+                Routes.checkoutPaymentRoute,
+              ),
+            ),
+            20.verticalSpace,
             Obx(
-              () {
+                  () {
                 return DropdownRentNeedComponent(
                   title: 'Keperluan sewa',
                   selectedValue: CheckoutController.to.selectedRentNeed.value,
@@ -71,19 +81,6 @@ class CheckoutScreen extends StatelessWidget {
                   iconPath: assetsConstant.rentNeedIcon,
                 );
               },
-            ),
-            20.verticalSpace,
-            PaymentMethodComponent(
-              icon: assetsConstant.paymentIcon,
-              hint: 'Pilih Metode Pembayaran',
-              label: 'Metode Pembayaran',
-              controller: CheckoutController.to.paymentController,
-              onTap: () => Get.toNamed(
-                Routes.checkoutPaymentRoute,
-                // arguments: {
-                //   'laptop': laptop,
-                // },
-              ),
             ),
             20.verticalSpace,
             Obx(
@@ -112,13 +109,16 @@ class CheckoutScreen extends StatelessWidget {
         ),
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
-          onTap: () {
-            Get.offAndToNamed(
-              Routes.checkoutSuccessCheckoutRoute,
-              arguments: {
-                'laptop': CheckoutController.to.detailLaptop.value,
-              },
-            );
+          onTap: () async {
+            await CheckoutController.to.verify();
+            if (CheckoutController.to.isVerified.value) {
+              Get.offAndToNamed(
+                Routes.checkoutSuccessCheckoutRoute,
+                arguments: {
+                  'laptop': CheckoutController.to.detailLaptop.value,
+                },
+              );
+            }
           },
         ),
       ),

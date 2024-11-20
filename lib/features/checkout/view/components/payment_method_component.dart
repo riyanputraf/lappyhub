@@ -34,6 +34,8 @@ class PaymentMethodComponent extends StatelessWidget {
         label: label,
         enable: false,
         onTapBox: onTap,
+        isRequired: true,
+        requiredText: 'Payment cannot be empty',
         suffixIcon: Icon(
           Icons.chevron_right,
           color: ColorStyle.dark,

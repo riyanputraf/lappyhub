@@ -32,6 +32,8 @@ class ChooseDateComponent extends StatelessWidget {
         label: label,
         enable: false,
         onTapBox: onTap,
+        isRequired: true,
+        requiredText: 'Date cannot be empty',
       ),
     );
   }
