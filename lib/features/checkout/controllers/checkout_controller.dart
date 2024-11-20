@@ -2,17 +2,23 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lappyhub/features/checkout/models/checkout_order_model.dart';
+import 'package:lappyhub/features/checkout/repositories/checkout_repository.dart';
 import 'package:lappyhub/features/checkout/view/components/finger_print_dialog_component.dart';
 import 'package:lappyhub/features/checkout/view/components/pin_dialog_component.dart';
 import 'package:local_auth/local_auth.dart';
 
 import '../../../configs/routes/route.dart';
+import '../../../shared/styles/color_style.dart';
 import '../../home/models/laptop_detail_model.dart';
 
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find();
+
+  late final CheckoutRepository checkoutRepository;
 
   var formKey = GlobalKey<FormState>();
 
@@ -50,12 +56,65 @@ class CheckoutController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    checkoutRepository = CheckoutRepository();
     laptopPrice.value = int.parse(Get.arguments['laptopPrice']);
     final arguments = Get.arguments;
     final LaptopDetailModel laptop = arguments['laptop'];
     detailLaptop.value = laptop;
   }
 
+  /// Fungsi untuk melakukan pemesanan
+  Future<void> createOrder(LaptopDetailModel laptop, String userId) async {
+    try {
+      final order = CheckoutOrderModel(
+        userId: userId,
+        startDate: startDate.value.toString(),
+        endDate: endDate.value.toString(),
+        subPrice: subTotalPrice.value,
+        grandPrice: grandTotalPrice.value,
+        duration: durationDays.value,
+        serviceFee: serviceFee,
+        paymentMethod: selectedPaymentMethod.value,
+        rentNeed: selectedRentNeed.value,
+        status: 0,
+        laptop: laptop,
+      );
+
+      var isValid = formKey.currentState!.validate();
+      Get.focusScope!.unfocus();
+      if (isValid) {
+
+        formKey.currentState!.save();
+        await CheckoutController.to.verify();
+
+        if (isVerified.value) {
+          EasyLoading.instance.backgroundColor = ColorStyle.primary;
+          EasyLoading.show(
+            status: 'Sedang Diproses...',
+            maskType: EasyLoadingMaskType.black,
+            dismissOnTap: false,
+          );
+
+          final result = await checkoutRepository.createOrder(order);
+          if (result) {
+            EasyLoading.dismiss();
+            Get.offAndToNamed(
+              Routes.checkoutSuccessCheckoutRoute,
+              arguments: {
+                'laptop': detailLaptop.value,
+              },
+            );
+          } else {
+            EasyLoading.dismiss();
+          }
+        }
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to create order: $e');
+    }
+  }
+
+  /// Fungsi untuk update payment
   void updateSelectedPayment(String paymentMethod) {
     selectedPaymentMethod.value = paymentMethod;
     paymentController.text = paymentMethod;
@@ -120,6 +179,7 @@ class CheckoutController extends GetxController {
     }
   }
 
+  /// Fungsi untuk menampilkan fingerprint dialog
   Future<String?> showFingerprintDialog() async {
     final result = await Get.defaultDialog(
       title: '',
@@ -131,6 +191,7 @@ class CheckoutController extends GetxController {
     return result;
   }
 
+  /// Fungsi untuk menampilkan pin dialog
   Future<void> showPinDialog() async {
     const userPin = '123456';
 
@@ -149,6 +210,7 @@ class CheckoutController extends GetxController {
     }
   }
 
+  /// Fungsi untuk melakukan proses verifikasi
   Future<void> verify() async {
     // check supported auth type in device
     final LocalAuthentication localAuth = LocalAuthentication();

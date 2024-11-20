@@ -8,8 +8,8 @@ import 'package:lappyhub/features/checkout/view/components/payment_method_compon
 import '../../../../configs/routes/route.dart';
 import '../../constants/checkout_assets_constant.dart';
 
-class FormOrderComponent extends StatelessWidget {
-  const FormOrderComponent({
+class FormCheckoutComponent extends StatelessWidget {
+  const FormCheckoutComponent({
     super.key,
     required this.assetsConstant,
   });

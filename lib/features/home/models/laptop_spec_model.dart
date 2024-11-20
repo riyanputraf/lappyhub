@@ -28,4 +28,17 @@ class LaptopSpecModel {
       fingerprint: json['fingerprint'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'cpu': cpu,
+      'gpu': gpu,
+      'ram': ram,
+      'rom': rom,
+      'baterai': baterai,
+      'kamera': kamera,
+      'fingerprint': fingerprint,
+    };
+  }
+
 }

@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 import 'package:lappyhub/features/checkout/controllers/checkout_controller.dart';
 import 'package:lappyhub/features/checkout/view/components/checkout_laptop_card_component.dart';
 import 'package:lappyhub/features/checkout/view/components/dropdown_rent_need_component.dart';
-import 'package:lappyhub/features/checkout/view/components/form_order_component.dart';
+import 'package:lappyhub/features/checkout/view/components/form_checkout_component.dart';
 import 'package:lappyhub/features/checkout/view/components/order_summary_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
 
-import '../../../../configs/routes/route.dart';
 import '../../constants/checkout_assets_constant.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -34,7 +33,7 @@ class CheckoutScreen extends StatelessWidget {
               laptop: CheckoutController.to.detailLaptop.value,
             ),
             20.verticalSpace,
-            FormOrderComponent(
+            FormCheckoutComponent(
               assetsConstant: assetsConstant,
             ),
             20.verticalSpace,
@@ -76,23 +75,9 @@ class CheckoutScreen extends StatelessWidget {
         ),
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
-          onTap: () async {
-            var isValid =
-                CheckoutController.to.formKey.currentState!.validate();
-            Get.focusScope!.unfocus();
-
-            if (isValid) {
-              CheckoutController.to.formKey.currentState!.save();
-              await CheckoutController.to.verify();
-              if (CheckoutController.to.isVerified.value) {
-                Get.offAndToNamed(
-                  Routes.checkoutSuccessCheckoutRoute,
-                  arguments: {
-                    'laptop': CheckoutController.to.detailLaptop.value,
-                  },
-                );
-              }
-            }
+          onTap: () {
+            CheckoutController.to
+                .createOrder(CheckoutController.to.detailLaptop.value!, '1');
           },
         ),
       ),

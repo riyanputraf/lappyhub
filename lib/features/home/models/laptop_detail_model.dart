@@ -33,4 +33,17 @@ class LaptopDetailModel {
       specs: LaptopSpecModel.fromJson(json['specs']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'price': price,
+      'category': category,
+      'is_available': isAvailable,
+      'rating': rating,
+      'specs': specs.toJson(),
+    };
+  }
 }
