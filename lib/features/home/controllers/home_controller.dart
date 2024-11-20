@@ -29,11 +29,15 @@ class HomeController extends GetxController {
   var currentPage = 1;
 
   // Refresh Controller
-  final RefreshController refreshController = RefreshController();
+  late final RefreshController refreshController;
+
 
   @override
   void onInit() {
     super.onInit();
+    refreshController = RefreshController(
+      initialRefresh: false,
+    );
     homeRepository = HomeRepository();
     fetchPopularLaptops();
     fetchListLaptops(page: 1);
@@ -111,5 +115,4 @@ class HomeController extends GetxController {
       refreshController.loadFailed(); // Gagal load more
     }
   }
-
 }

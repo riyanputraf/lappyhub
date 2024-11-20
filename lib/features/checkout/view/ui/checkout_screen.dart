@@ -117,7 +117,9 @@ class CheckoutScreen extends StatelessWidget {
         ),
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
-          onTap: () {},
+          onTap: () {
+            Get.offAndToNamed(Routes.checkoutSuccessCheckoutRoute);
+          },
         ),
       ),
     );

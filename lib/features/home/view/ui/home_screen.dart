@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:lappyhub/features/home/controllers/home_controller.dart';
 import 'package:lappyhub/features/home/view/components/app_bar_component.dart';
 import 'package:lappyhub/features/home/view/components/category_list_component.dart';
@@ -26,44 +25,40 @@ class HomeScreen extends StatelessWidget {
         logoPath: assetsConstant.lappyHeader,
         icon: assetsConstant.searchIcon,
       ),
-      body: Obx(
-        () {
-          return SmartRefresher(
-            physics: const BouncingScrollPhysics(),
-            controller: HomeController.to.refreshController,
-            enablePullDown: true,
-            enablePullUp: true,
-            onRefresh: HomeController.to.onRefresh,
-            onLoading: HomeController.to.onLoading,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  36.verticalSpace,
+      body: SmartRefresher(
+        physics: const BouncingScrollPhysics(),
+        controller: HomeController.to.refreshController,
+        enablePullDown: true,
+        enablePullUp: true,
+        onRefresh: HomeController.to.onRefresh,
+        onLoading: HomeController.to.onLoading,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              36.verticalSpace,
 
-                  /// List Kategori
-                  SectionHeaderCustom(title: 'Kategori'),
-                  CategoryList(),
+              /// List Kategori
+              SectionHeaderCustom(title: 'Kategori'),
+              CategoryList(),
 
-                  30.verticalSpace,
+              30.verticalSpace,
 
-                  /// List Laptop Populer (Horizontal Scroll)
-                  SectionHeaderCustom(title: 'Populer'),
-                  PopularLaptopList(
-                    laptop: HomeController.to.popularLaptops,
-                  ),
-
-                  30.verticalSpace,
-
-                  /// List Laptop (Vertical Scroll)
-                  SectionHeaderCustom(title: 'List Laptop'),
-                  LaptopListComponent(
-                    laptop: HomeController.to.listLaptops,
-                  ),
-                ],
+              /// List Laptop Populer (Horizontal Scroll)
+              SectionHeaderCustom(title: 'Populer'),
+              PopularLaptopList(
+                laptop: HomeController.to.popularLaptops,
               ),
-            ),
-          );
-        },
+
+              30.verticalSpace,
+
+              /// List Laptop (Vertical Scroll)
+              SectionHeaderCustom(title: 'List Laptop'),
+              LaptopListComponent(
+                laptop: HomeController.to.listLaptops,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

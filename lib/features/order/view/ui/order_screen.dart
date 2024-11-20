@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lappyhub/shared/styles/color_style.dart';
+import 'package:lappyhub/features/order/controllers/order_controller.dart';
+import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 
 import '../../constants/order_assets_constant.dart';
 
@@ -10,6 +11,10 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Orders'));
+    return Scaffold(
+      appBar: AppBarCustom(
+        title: OrderController.to.title.value,
+      ),
+    );
   }
 }

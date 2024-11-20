@@ -15,7 +15,7 @@ class ButtonPrimaryCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Material(
+    return Material(
       borderRadius: BorderRadius.circular(50.r),
       color: ColorStyle.primary,
       child: InkWell(
@@ -30,7 +30,7 @@ class ButtonPrimaryCustom extends StatelessWidget {
               style: GoogleTextStyle.fw700.copyWith(
                 fontSize: 16.sp,
                 color: ColorStyle.white,
-              )
+              ),
             ),
           ),
         ),
