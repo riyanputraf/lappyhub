@@ -9,10 +9,10 @@ import '../../../../shared/widgets/currency_format_custom.dart';
 class CheckoutLaptopCardComponent extends StatelessWidget {
   const CheckoutLaptopCardComponent({
     super.key,
-    required this.laptop,
+    this.laptop,
   });
 
-  final LaptopDetailModel laptop;
+  final LaptopDetailModel? laptop;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CheckoutLaptopCardComponent extends StatelessWidget {
       child: Row(
         children: [
           Image.network(
-            laptop.image,
+            laptop!.image,
             width: 90.w,
             height: 70.h,
             fit: BoxFit.contain,
@@ -42,7 +42,7 @@ class CheckoutLaptopCardComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  laptop.name,
+                  laptop!.name,
                   textAlign: TextAlign.center,
                   style: GoogleTextStyle.fw600.copyWith(
                     fontSize: 16.sp,
@@ -50,7 +50,7 @@ class CheckoutLaptopCardComponent extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  laptop.category,
+                  laptop!.category,
                   textAlign: TextAlign.center,
                   style: GoogleTextStyle.fw400.copyWith(
                     fontSize: 14.sp,
@@ -65,7 +65,7 @@ class CheckoutLaptopCardComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                CurrencyFormat.convertToIdr(int.parse(laptop.price), 0),
+                CurrencyFormat.convertToIdr(int.parse(laptop!.price), 0),
                 textAlign: TextAlign.center,
                 style: GoogleTextStyle.fw700.copyWith(
                   fontSize: 18.sp,

@@ -28,7 +28,7 @@ class OrderSummaryComponent extends StatelessWidget {
   final String title;
   final DateTime? startDate;
   final DateTime? endDate;
-  final LaptopDetailModel laptop;
+  final LaptopDetailModel? laptop;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class OrderSummaryComponent extends StatelessWidget {
                 OrderSummaryItemComponent(
                   title: 'Harga',
                   value:
-                      CurrencyFormat.convertToIdr(int.parse(laptop.price), 0),
+                      CurrencyFormat.convertToIdr(int.parse(laptop!.price), 0),
                   subTitle: '/hari',
                 ),
                 OrderSummaryItemComponent(

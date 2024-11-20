@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../home/models/laptop_detail_model.dart';
+
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find();
 
@@ -32,10 +34,15 @@ class CheckoutController extends GetxController {
   final RxInt subTotalPrice = 0.obs;
   final RxInt grandTotalPrice = 0.obs;
 
+  var detailLaptop = Rxn<LaptopDetailModel>();
+
   @override
   void onInit() {
     super.onInit();
     laptopPrice.value = int.parse(Get.arguments['laptopPrice']);
+    final arguments = Get.arguments;
+    final LaptopDetailModel laptop = arguments['laptop'];
+    detailLaptop.value = laptop;
   }
 
   void updateSelectedPayment(String paymentMethod) {

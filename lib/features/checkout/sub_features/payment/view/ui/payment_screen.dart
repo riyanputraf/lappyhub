@@ -8,7 +8,6 @@ import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 
 import '../../../../../../shared/styles/color_style.dart';
 import '../../../../../../shared/widgets/button_primary_custom.dart';
-import '../../../../../home/models/laptop_detail_model.dart';
 import '../../../../constants/checkout_assets_constant.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -18,14 +17,11 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = Get.arguments;
-    final LaptopDetailModel laptop = arguments['laptop'];
-
     return Scaffold(
       backgroundColor: ColorStyle.softGrey,
       appBar: AppBarCustom(
         title: 'Metode Pembayaran',
-        onBackPressed: () => Get.back(result: laptop),
+        onBackPressed: () => Get.back(),
       ),
       body: Column(
         children: [

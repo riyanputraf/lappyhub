@@ -7,7 +7,6 @@ import 'package:lappyhub/features/checkout/view/components/choose_date_component
 import 'package:lappyhub/features/checkout/view/components/dropdown_rent_need_component.dart';
 import 'package:lappyhub/features/checkout/view/components/order_summary_component.dart';
 import 'package:lappyhub/features/checkout/view/components/payment_method_component.dart';
-import 'package:lappyhub/features/home/models/laptop_detail_model.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
@@ -22,10 +21,6 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Passing argument
-    final arguments = Get.arguments;
-    final LaptopDetailModel laptop = arguments['laptop'];
-
     return Scaffold(
       backgroundColor: ColorStyle.softGrey,
       appBar: AppBarCustom(
@@ -37,7 +32,7 @@ class CheckoutScreen extends StatelessWidget {
           children: [
             20.verticalSpace,
             CheckoutLaptopCardComponent(
-              laptop: laptop,
+              laptop: CheckoutController.to.detailLaptop.value,
             ),
             20.verticalSpace,
             ChooseDateComponent(
@@ -85,9 +80,9 @@ class CheckoutScreen extends StatelessWidget {
               controller: CheckoutController.to.paymentController,
               onTap: () => Get.toNamed(
                 Routes.checkoutPaymentRoute,
-                arguments: {
-                  'laptop': laptop,
-                },
+                // arguments: {
+                //   'laptop': laptop,
+                // },
               ),
             ),
             20.verticalSpace,
@@ -98,7 +93,7 @@ class CheckoutScreen extends StatelessWidget {
                   duration: CheckoutController.to.durationDays.value,
                   startDate: CheckoutController.to.startDate.value,
                   endDate: CheckoutController.to.endDate.value,
-                  laptop: laptop,
+                  laptop: CheckoutController.to.detailLaptop.value,
                   subTotalPrice: CheckoutController.to.subTotalPrice.value,
                   serviceFee: CheckoutController.to.serviceFee,
                   grandTotalPrice: CheckoutController.to.grandTotalPrice.value,
@@ -118,7 +113,12 @@ class CheckoutScreen extends StatelessWidget {
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
           onTap: () {
-            Get.offAndToNamed(Routes.checkoutSuccessCheckoutRoute);
+            Get.offAndToNamed(
+              Routes.checkoutSuccessCheckoutRoute,
+              arguments: {
+                'laptop': CheckoutController.to.detailLaptop.value,
+              },
+            );
           },
         ),
       ),

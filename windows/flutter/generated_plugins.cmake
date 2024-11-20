@@ -4,10 +4,13 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   fast_rsa
+  file_selector_windows
   firebase_auth
   firebase_core
+  flutter_inappwebview_windows
   flutter_localization
   geolocator_windows
+  local_auth_windows
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
