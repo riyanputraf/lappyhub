@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/features/checkout/controllers/checkout_controller.dart';
 import 'package:lappyhub/features/checkout/view/components/checkout_laptop_card_component.dart';
-import 'package:lappyhub/features/checkout/view/components/choose_date_component.dart';
 import 'package:lappyhub/features/checkout/view/components/dropdown_rent_need_component.dart';
+import 'package:lappyhub/features/checkout/view/components/form_order_component.dart';
 import 'package:lappyhub/features/checkout/view/components/order_summary_component.dart';
-import 'package:lappyhub/features/checkout/view/components/payment_method_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
@@ -35,44 +34,12 @@ class CheckoutScreen extends StatelessWidget {
               laptop: CheckoutController.to.detailLaptop.value,
             ),
             20.verticalSpace,
-            ChooseDateComponent(
-              icon: assetsConstant.calendarIcon,
-              hint: 'Pilih tanggal mulai',
-              label: 'Tanggal Mulai Sewa',
-              controller: CheckoutController.to.startDateController,
-              onTap: () {
-                CheckoutController.to.pickDate(
-                  CheckoutController.to.startDateController,
-                  true,
-                );
-              },
-            ),
-            20.verticalSpace,
-            ChooseDateComponent(
-              icon: assetsConstant.calendarIcon,
-              hint: 'Pilih tanggal akhir',
-              label: 'Tanggal Akhir Sewa',
-              controller: CheckoutController.to.endDateController,
-              onTap: () {
-                CheckoutController.to.pickDate(
-                  CheckoutController.to.endDateController,
-                  false,
-                );
-              },
-            ),
-            20.verticalSpace,
-            PaymentMethodComponent(
-              icon: assetsConstant.paymentIcon,
-              hint: 'Pilih Metode Pembayaran',
-              label: 'Metode Pembayaran',
-              controller: CheckoutController.to.paymentController,
-              onTap: () => Get.toNamed(
-                Routes.checkoutPaymentRoute,
-              ),
+            FormOrderComponent(
+              assetsConstant: assetsConstant,
             ),
             20.verticalSpace,
             Obx(
-                  () {
+              () {
                 return DropdownRentNeedComponent(
                   title: 'Keperluan sewa',
                   selectedValue: CheckoutController.to.selectedRentNeed.value,
@@ -110,14 +77,21 @@ class CheckoutScreen extends StatelessWidget {
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
           onTap: () async {
-            await CheckoutController.to.verify();
-            if (CheckoutController.to.isVerified.value) {
-              Get.offAndToNamed(
-                Routes.checkoutSuccessCheckoutRoute,
-                arguments: {
-                  'laptop': CheckoutController.to.detailLaptop.value,
-                },
-              );
+            var isValid =
+                CheckoutController.to.formKey.currentState!.validate();
+            Get.focusScope!.unfocus();
+
+            if (isValid) {
+              CheckoutController.to.formKey.currentState!.save();
+              await CheckoutController.to.verify();
+              if (CheckoutController.to.isVerified.value) {
+                Get.offAndToNamed(
+                  Routes.checkoutSuccessCheckoutRoute,
+                  arguments: {
+                    'laptop': CheckoutController.to.detailLaptop.value,
+                  },
+                );
+              }
             }
           },
         ),

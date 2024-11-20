@@ -15,7 +15,7 @@ class ShimmerPopularLaptopComponent extends StatelessWidget {
         margin: EdgeInsets.only(right: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(16.r),
         ),
       ),
     );
