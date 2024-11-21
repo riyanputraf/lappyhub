@@ -3,6 +3,7 @@ import 'package:lappyhub/features/home/repositories/home_repository.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import '../constants/home_assets_constant.dart';
+import '../models/category_model.dart';
 import '../models/laptop_model.dart';
 
 class HomeController extends GetxController {
@@ -10,19 +11,21 @@ class HomeController extends GetxController {
 
   final assetsConstant = HomeAssetsConstant();
 
-  List<Map<String, String>> get categories => [
-        {'name': 'Asus', 'icon': assetsConstant.asusIcon},
-        {'name': 'Apple', 'icon': assetsConstant.appleIcon},
-        {'name': 'Acer', 'icon': assetsConstant.acerIcon},
-      ];
+  // List<Map<String, String>> get categories => [
+  //       {'name': 'Asus', 'icon': assetsConstant.asusIcon},
+  //       {'name': 'Apple', 'icon': assetsConstant.appleIcon},
+  //       {'name': 'Acer', 'icon': assetsConstant.acerIcon},
+  //     ];
 
   late final HomeRepository homeRepository;
 
+  var categories = <CategoryModel>[].obs;
   var popularLaptops = <LaptopModel>[].obs;
   var listLaptops = <LaptopModel>[].obs;
 
   var hasMoreData = true.obs;
 
+  var isLoadingCategory = 'idle'.obs;
   var isLoadingPopularLaptops = 'idle'.obs;
   var isLoadingLaptops = 'idle'.obs;
   var isLoadingMore = 'idle'.obs;
@@ -41,6 +44,18 @@ class HomeController extends GetxController {
     homeRepository = HomeRepository();
     fetchPopularLaptops();
     fetchListLaptops(page: 1);
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      isLoadingCategory.value = 'loading';
+      final data = await homeRepository.fetchCategories();
+      categories.value = data;
+      isLoadingCategory.value = 'success';
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to load categories');
+    }
   }
 
   /// Fetch data list popular laptop (Horizontal Scroll)
@@ -90,6 +105,7 @@ class HomeController extends GetxController {
       currentPage = 1;
       refreshController.resetNoData(); // Reset refresh
       await Future.wait([
+        fetchCategories(),
         fetchPopularLaptops(),
         fetchListLaptops(page: 1),
       ]);

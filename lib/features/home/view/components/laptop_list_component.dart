@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/features/home/view/components/laptop_card_component.dart';
-import 'package:lappyhub/features/home/view/components/shimmer_laptop_list_component.dart';
+import 'package:lappyhub/shared/widgets/shimmer_custom.dart';
 
 import '../../../../configs/routes/route.dart';
 import '../../controllers/home_controller.dart';
@@ -21,9 +21,16 @@ class LaptopListComponent extends StatelessWidget {
     return Obx(
       () {
         if (HomeController.to.isLoadingLaptops.value == 'loading') {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: ShimmerLaptopListComponent(height: 98.h),
+          return Column(
+            children: [
+              ShimmerCustom(
+                itemCount: 5,
+                axis: Axis.vertical,
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 0),
+                height: 98.h,
+                paddingShimmer: EdgeInsets.only(bottom: 16.h),
+              ),
+            ],
           );
         }
         return Padding(
@@ -45,7 +52,13 @@ class LaptopListComponent extends StatelessWidget {
                 },
               ),
               if (HomeController.to.isLoadingMore.value == 'loading') ...[
-                ShimmerLaptopListComponent(height: 98.h)
+                ShimmerCustom(
+                  itemCount: 5,
+                  axis: Axis.vertical,
+                  padding: EdgeInsets.symmetric(vertical: 0),
+                  height: 98.h,
+                  paddingShimmer: EdgeInsets.only(bottom: 16.h),
+                ),
               ]
             ],
           ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../shared/styles/color_style.dart';
 import '../../../../shared/styles/google_text_style.dart';
@@ -36,7 +35,7 @@ class CategoryCardComponent extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: SvgPicture.asset(
+            child: Image.network(
               iconPath,
               height: 24.h,
               width: 24.w,

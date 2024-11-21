@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/features/home/controllers/home_controller.dart';
 import 'package:lappyhub/features/home/view/components/popular_laptop_card_component.dart';
-import 'package:lappyhub/features/home/view/components/shimmer_popular_laptop_component.dart';
+import 'package:lappyhub/shared/widgets/shimmer_custom.dart';
 
 import '../../../../configs/routes/route.dart';
 import '../../models/laptop_model.dart';
@@ -23,12 +23,11 @@ class PopularLaptopList extends StatelessWidget {
         if (HomeController.to.isLoadingPopularLaptops.value == 'loading') {
           return SizedBox(
             height: 250.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: ShimmerCustom(
               itemCount: 5,
-              itemBuilder: (context, index) => ShimmerPopularLaptopComponent(),
+              axis: Axis.horizontal,
+              width: 252.w,
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
             ),
           );
         }
@@ -42,7 +41,7 @@ class PopularLaptopList extends StatelessWidget {
             itemBuilder: (context, index) {
               return PopularLaptopCardComponent(
                 laptop: laptop[index],
-                onTap: (){
+                onTap: () {
                   Get.toNamed('${Routes.homeRoute}/${laptop[index].id}');
                 },
               );

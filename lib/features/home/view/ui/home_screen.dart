@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBarComponent(
         logoPath: assetsConstant.lappyHeader,
         icon: assetsConstant.searchIcon,
-        onTap: (){
+        onTap: () {
           Get.toNamed(Routes.homeSearchLaptopRoute);
         },
       ),
@@ -44,7 +44,9 @@ class HomeScreen extends StatelessWidget {
 
               /// List Kategori
               SectionHeaderCustom(title: 'Kategori'),
-              CategoryList(),
+              CategoryList(
+                listCategory: HomeController.to.categories,
+              ),
 
               30.verticalSpace,
 

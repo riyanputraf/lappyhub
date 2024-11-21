@@ -20,34 +20,35 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorStyle.softGrey,
       body: Obx(() {
-        if(LoginController.to.isLoggedIn.value){
+        if (LoginController.to.isLoggedIn.value) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: NetworkImage(HiveService.get<String>('avatar') ?? 'avatar'), // Avatar dari Hive
+                  backgroundImage: NetworkImage(
+                      HiveService.get<String>('avatar') ??
+                          'avatar'), // Avatar dari Hive
                 ),
                 16.verticalSpace,
                 Text(
                   HiveService.get<String>('name') ?? 'name',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 8.verticalSpace,
-                ElevatedButton(
-                  onPressed: () async {
+                ButtonPrimaryCustom(
+                  text: 'Logout',
+                  color: ColorStyle.danger,
+                  onTap: () async {
                     await ProfileController.to.logout();
                   },
-                  child: const Text('Logout'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorStyle.danger,
-                  ),
                 ),
               ],
             ),
           );
-        } else{
+        } else {
           return Center(
             child: ButtonPrimaryCustom(
               text: 'Login disini',
