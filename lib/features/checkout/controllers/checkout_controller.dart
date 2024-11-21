@@ -13,6 +13,7 @@ import 'package:local_auth/local_auth.dart';
 
 import '../../../configs/routes/route.dart';
 import '../../../shared/styles/color_style.dart';
+import '../../../utils/services/hive_service.dart';
 import '../../home/models/laptop_detail_model.dart';
 
 class CheckoutController extends GetxController {
@@ -193,13 +194,13 @@ class CheckoutController extends GetxController {
 
   /// Fungsi untuk menampilkan pin dialog
   Future<void> showPinDialog() async {
-    const userPin = '123456';
+    String? userPin = HiveService.get<String>('pin');
 
     final bool? authenticated = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       radius: 30,
-      content: const PinDialogComponent(pin: userPin),
+      content: PinDialogComponent(pin: userPin ?? '123456'),
     );
 
     if (authenticated == true) {

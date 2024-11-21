@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lappyhub/features/login/controllers/login_controller.dart';
 import 'package:lappyhub/features/order/controllers/order_controller.dart';
 import 'package:lappyhub/features/profile/controllers/profile_controller.dart';
 
@@ -13,5 +14,6 @@ class MainBinding extends Bindings {
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<OrderController>(() => OrderController());
     Get.lazyPut<ProfileController>(() => ProfileController());
+    Get.lazyPut<LoginController>(() => LoginController());
   }
 }

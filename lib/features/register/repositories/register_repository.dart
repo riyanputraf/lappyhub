@@ -15,7 +15,7 @@ class RegisterRepository {
 
   var apiConstant = RegisterApiConstant();
   final String avatarDefault =
-      'https://cloud.appwrite.io/v1/storage/buckets/6735a8d90010245cb0da/files/67361639000b2b9e515c/view?project=67318161002f57a70dd5&project=67318161002f57a70dd5&mode=admin';
+      'https://cdn-icons-png.flaticon.com/512/9385/9385289.png';
   late final Dio dio;
 
   RegisterRepository() {

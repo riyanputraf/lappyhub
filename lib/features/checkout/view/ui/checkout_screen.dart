@@ -9,6 +9,7 @@ import 'package:lappyhub/features/checkout/view/components/order_summary_compone
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
+import 'package:lappyhub/utils/services/hive_service.dart';
 
 import '../../constants/checkout_assets_constant.dart';
 
@@ -76,8 +77,11 @@ class CheckoutScreen extends StatelessWidget {
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
           onTap: () {
-            CheckoutController.to
-                .createOrder(CheckoutController.to.detailLaptop.value!, '1');
+            String? idUser = HiveService.get<String>('id');
+            if (idUser != null) {
+              CheckoutController.to.createOrder(
+                  CheckoutController.to.detailLaptop.value!, idUser);
+            }
           },
         ),
       ),

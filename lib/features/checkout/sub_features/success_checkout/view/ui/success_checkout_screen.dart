@@ -5,7 +5,6 @@ import 'package:lappyhub/features/checkout/sub_features/success_checkout/view/co
 import 'package:lappyhub/features/checkout/sub_features/success_checkout/view/components/laptop_order_information_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
-import 'package:lappyhub/shared/widgets/button_secondary_custom.dart';
 
 import '../../../../../main/controllers/main_controller.dart';
 import '../../../../constants/checkout_assets_constant.dart';
@@ -42,8 +41,10 @@ class SuccessCheckoutScreen extends StatelessWidget {
             },
           ),
           12.verticalSpace,
-          ButtonSecondaryCustom(
+          ButtonPrimaryCustom(
             text: 'Lihat Pesanan Saya',
+            color: ColorStyle.white,
+            textColor: ColorStyle.dark,
             onTap: () {
               MainController.to.updateIndex(1);
               // Navigasi kembali ke halaman order

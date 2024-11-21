@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:lappyhub/features/register/repositories/register_repository.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 
+import '../../../configs/routes/route.dart';
 import '../view/components/pin_register_dialog_component.dart';
-
 
 class RegisterController extends GetxController {
   static RegisterController get to => Get.find();
@@ -74,8 +74,7 @@ class RegisterController extends GetxController {
       if (user != null) {
         EasyLoading.instance.backgroundColor = ColorStyle.success;
         EasyLoading.showSuccess('Registration Success');
-        Get.offAllNamed(
-            '/login'); // Navigasi ke halaman login setelah berhasil registrasi
+        Get.offNamed(Routes.loginRoute);
       } else {
         EasyLoading.instance.backgroundColor = ColorStyle.danger;
         EasyLoading.showError(

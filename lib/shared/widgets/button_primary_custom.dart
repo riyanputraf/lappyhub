@@ -8,16 +8,20 @@ class ButtonPrimaryCustom extends StatelessWidget {
     super.key,
     required this.text,
     required this.onTap,
+    this.color,
+    this.textColor,
   });
 
   final String text;
   final VoidCallback onTap;
+  final Color? color;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(50.r),
-      color: ColorStyle.primary,
+      color: color ?? ColorStyle.primary,
       child: InkWell(
         borderRadius: BorderRadius.circular(50.r),
         onTap: onTap,
@@ -29,7 +33,7 @@ class ButtonPrimaryCustom extends StatelessWidget {
               text,
               style: GoogleTextStyle.fw700.copyWith(
                 fontSize: 16.sp,
-                color: ColorStyle.white,
+                color: textColor ?? ColorStyle.white,
               ),
             ),
           ),

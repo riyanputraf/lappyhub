@@ -9,6 +9,7 @@ import 'package:lappyhub/features/home/view/components/detail_laptop_components/
 import 'package:lappyhub/features/home/view/components/detail_laptop_components/rent_button_component.dart';
 import 'package:lappyhub/features/home/view/components/detail_laptop_components/specification_laptop_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
+import 'package:lappyhub/utils/services/hive_service.dart';
 
 import '../../../../configs/routes/route.dart';
 import '../../constants/home_assets_constant.dart';
@@ -66,13 +67,17 @@ class DetailLaptopScreen extends StatelessWidget {
                 RentButtonComponent(
                   laptop: laptop,
                   onTap: () {
-                    Get.toNamed(
-                      Routes.checkoutRoute,
-                      arguments: {
-                        'laptop': laptop,
-                        'laptopPrice': laptop.price,
-                      },
-                    );
+                    if (HiveService.isLoggedIn()) {
+                      Get.toNamed(
+                        Routes.checkoutRoute,
+                        arguments: {
+                          'laptop': laptop,
+                          'laptopPrice': laptop.price,
+                        },
+                      );
+                    } else {
+                      DetailLaptopController.to.showConfirmLoginDialog();
+                    }
                   },
                 ),
                 10.verticalSpace,

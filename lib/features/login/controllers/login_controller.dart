@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lappyhub/features/login/repositories/login_repository.dart';
 
 import '../../../shared/styles/color_style.dart';
+import '../../../utils/services/hive_service.dart';
 
 class LoginController extends GetxController {
   static LoginController get to => Get.find();
@@ -16,6 +17,8 @@ class LoginController extends GetxController {
   var isPassword = true.obs;
 
   late final LoginRepository loginRepository;
+
+  var isLoggedIn = HiveService.isLoggedIn().obs;
 
   @override
   void onInit() {
@@ -30,6 +33,10 @@ class LoginController extends GetxController {
     } else {
       isPassword.value = true;
     }
+  }
+
+  void checkLoginStatus() {
+    isLoggedIn.value = HiveService.isLoggedIn();
   }
 
   Future<void> login(context) async {
@@ -50,8 +57,11 @@ class LoginController extends GetxController {
       );
 
       if (user != null) {
+        await HiveService.setAuth(user);
         EasyLoading.instance.backgroundColor = ColorStyle.success;
+        isLoggedIn.value = true;
         EasyLoading.showSuccess('Login Success');
+        Get.back();
       } else {
         EasyLoading.dismiss();
       }

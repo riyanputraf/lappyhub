@@ -109,7 +109,7 @@ class TextFormFieldCustom extends StatelessWidget {
 
               return null;
             },
-            style: GoogleTextStyle.fw600.copyWith(
+            style: GoogleTextStyle.fw500.copyWith(
               fontSize: 16.sp,
               color: ColorStyle.dark,
             ),

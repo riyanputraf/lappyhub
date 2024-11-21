@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-import '../../../../configs/routes/route.dart';
 import '../../../../shared/styles/color_style.dart';
 import '../../../../shared/styles/google_text_style.dart';
 
 class FooterRegisterComponent extends StatelessWidget {
-  const FooterRegisterComponent({super.key});
+  const FooterRegisterComponent({
+    super.key,
+    this.onTap,
+  });
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +27,7 @@ class FooterRegisterComponent extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              Get.offNamed(Routes.loginRoute);
-            },
+            onTap: onTap,
             child: Text(
               'Login',
               style: GoogleTextStyle.fw500.copyWith(
