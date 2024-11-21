@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lappyhub/features/home/controllers/home_controller.dart';
 import 'package:lappyhub/features/home/view/components/app_bar_component.dart';
 import 'package:lappyhub/features/home/view/components/category_list_component.dart';
@@ -9,6 +10,7 @@ import 'package:lappyhub/shared/widgets/section_header_custom.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
+import '../../../../configs/routes/route.dart';
 import '../../constants/home_assets_constant.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,6 +26,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBarComponent(
         logoPath: assetsConstant.lappyHeader,
         icon: assetsConstant.searchIcon,
+        onTap: (){
+          Get.toNamed(Routes.homeSearchLaptopRoute);
+        },
       ),
       body: SmartRefresher(
         physics: const BouncingScrollPhysics(),

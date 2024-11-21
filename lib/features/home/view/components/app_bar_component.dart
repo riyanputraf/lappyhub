@@ -6,11 +6,13 @@ import 'package:lappyhub/shared/styles/color_style.dart';
 class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
   final String logoPath;
   final String icon;
+  final VoidCallback? onTap;
 
   const AppBarComponent({
     Key? key,
     required this.logoPath,
     required this.icon,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -32,18 +34,21 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
         ),
         centerTitle: false,
         actions: [
-          Container(
-            height: 46.h,
-            width: 46.w,
-            decoration: BoxDecoration(
-              color: ColorStyle.white,
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              icon,
-              height: 24.h,
-              width: 24.w,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              height: 46.h,
+              width: 46.w,
+              decoration: BoxDecoration(
+                color: ColorStyle.white,
+                shape: BoxShape.circle,
+              ),
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                icon,
+                height: 24.h,
+                width: 24.w,
+              ),
             ),
           ),
         ],

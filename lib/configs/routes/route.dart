@@ -13,4 +13,5 @@ abstract class Routes {
   static const String checkoutPaymentRoute = '/checkout_payment';
   static const String checkoutSuccessCheckoutRoute =
       '/checkout_success_checkout';
+  static const String homeSearchLaptopRoute = '/home_search_laptop';
 }
