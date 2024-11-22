@@ -53,6 +53,7 @@ class CheckoutController extends GetxController {
   var detailLaptop = Rxn<LaptopDetailModel>();
 
   var isVerified = false.obs;
+  var isDateValid = false.obs;
 
   @override
   void onInit() {
@@ -83,32 +84,46 @@ class CheckoutController extends GetxController {
 
       var isValid = formKey.currentState!.validate();
       Get.focusScope!.unfocus();
+
+      // Cek form checkout is empty
       if (isValid) {
-
         formKey.currentState!.save();
-        await CheckoutController.to.verify();
 
-        if (isVerified.value) {
-          EasyLoading.instance.backgroundColor = ColorStyle.primary;
-          EasyLoading.show(
-            status: 'Sedang Diproses...',
-            maskType: EasyLoadingMaskType.black,
-            dismissOnTap: false,
-          );
+        // Cek is Datevalid
+        if (isDateValid.value) {
+          await CheckoutController.to.verify();
 
-          final result = await checkoutRepository.createOrder(order);
-          if (result) {
-            EasyLoading.dismiss();
-            Get.offAndToNamed(
-              Routes.checkoutSuccessCheckoutRoute,
-              arguments: {
-                'laptop': detailLaptop.value,
-              },
+          // Cek verified user
+          if (isVerified.value) {
+            EasyLoading.instance.backgroundColor = ColorStyle.primary;
+            EasyLoading.show(
+              status: 'Sedang Diproses...',
+              maskType: EasyLoadingMaskType.black,
+              dismissOnTap: false,
             );
-          } else {
-            EasyLoading.dismiss();
+
+            final result = await checkoutRepository.createOrder(order);
+            if (result) {
+              EasyLoading.dismiss();
+              Get.offAndToNamed(
+                Routes.checkoutSuccessCheckoutRoute,
+                arguments: {
+                  'laptop': detailLaptop.value,
+                },
+              );
+            } else {
+              EasyLoading.dismiss();
+            }
           }
+
+        }else{
+          Get.snackbar(
+            'Error',
+            'Tanggal akhir tidak boleh sebelum tanggal mulai',
+            backgroundColor: ColorStyle.danger,
+          );
         }
+
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to create order: $e');
@@ -166,13 +181,18 @@ class CheckoutController extends GetxController {
     if (startDate.value != null && endDate.value != null) {
       if (endDate.value!.isBefore(startDate.value!)) {
         // Validasi jika tanggal akhir sebelum tanggal mulai
+        isDateValid.value = false;
         Get.snackbar(
-            'Error', 'Tanggal akhir tidak boleh sebelum tanggal mulai');
+          'Error',
+          'Tanggal akhir tidak boleh sebelum tanggal mulai',
+          backgroundColor: ColorStyle.danger,
+        );
         durationDays.value = 0;
         subTotalPrice.value = 0;
         grandTotalPrice.value = 0;
         return;
       }
+      isDateValid.value = true;
       // Termasuk hari pertama
       durationDays.value =
           endDate.value!.difference(startDate.value!).inDays + 1;

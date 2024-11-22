@@ -8,9 +8,6 @@ import 'package:lappyhub/features/order/view/ui/order_screen.dart';
 import 'package:lappyhub/features/profile/view/ui/profile_screen.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 
-import '../../../home/controllers/home_controller.dart';
-import '../../../order/controllers/order_controller.dart';
-import '../../../profile/controllers/profile_controller.dart';
 import '../../constants/main_assets_constant.dart';
 
 class MainScreen extends StatelessWidget {
@@ -20,21 +17,9 @@ class MainScreen extends StatelessWidget {
 
   // List pages yang dihubungkan dalam stack screen
   final navigatePages = [
-    GetBuilder<HomeController>(
-      init: HomeController(),
-      dispose: (_) => Get.delete<HomeController>(),
-      builder: (_) => HomeScreen(),
-    ),
-    GetBuilder<OrderController>(
-      init: OrderController(),
-      dispose: (_) => Get.delete<OrderController>(),
-      builder: (_) => OrderScreen(),
-    ),
-    GetBuilder<ProfileController>(
-      init: ProfileController(),
-      dispose: (_) => Get.delete<ProfileController>(),
-      builder: (_) => ProfileScreen(),
-    ),
+    HomeScreen(),
+    OrderScreen(),
+    ProfileScreen(),
   ];
 
   @override

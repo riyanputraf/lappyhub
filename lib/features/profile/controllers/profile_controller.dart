@@ -12,11 +12,13 @@ class ProfileController extends GetxController {
 
   late final ProfileRepository profileRepository;
 
+  var isLoggedIn = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     profileRepository = ProfileRepository();
+    isLoggedIn.value = LoginController.to.isLoggedIn.value;
   }
 
   Future<void> logout() async {
@@ -31,6 +33,7 @@ class ProfileController extends GetxController {
     try {
       await profileRepository.logout();
       LoginController.to.isLoggedIn.value = false; // Update status login
+      isLoggedIn.value = LoginController.to.isLoggedIn.value;
       EasyLoading.instance.backgroundColor = ColorStyle.success;
       EasyLoading.showSuccess('Logout Success');
     } catch (e) {
