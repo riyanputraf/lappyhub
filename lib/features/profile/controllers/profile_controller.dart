@@ -26,6 +26,7 @@ class ProfileController extends GetxController {
       maskType: EasyLoadingMaskType.black,
       dismissOnTap: false,
     );
+    await Future.delayed(const Duration(seconds: 2));
 
     try {
       await profileRepository.logout();

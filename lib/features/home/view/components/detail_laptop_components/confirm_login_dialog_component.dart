@@ -8,7 +8,12 @@ import '../../../../../shared/styles/color_style.dart';
 import '../../../../../shared/styles/google_text_style.dart';
 
 class ConfirmLoginDialogComponent extends StatelessWidget {
-  const ConfirmLoginDialogComponent({super.key});
+  const ConfirmLoginDialogComponent({
+    super.key,
+    required this.image,
+  });
+
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +23,36 @@ class ConfirmLoginDialogComponent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           28.verticalSpace,
+          ColorFiltered(
+            colorFilter:
+                ColorFilter.mode(ColorStyle.softGrey, BlendMode.modulate),
+            child: Image.asset(
+              image,
+              height: 250.h,
+              width: 350.w,
+              fit: BoxFit.fitHeight,
+            ),
+          ),
           Text(
-            'Login untuk checkout?',
-            style: GoogleTextStyle.fw400.copyWith(
+            'Login untuk melanjutkan',
+            style: GoogleTextStyle.fw600.copyWith(
               fontSize: 22.sp,
               color: ColorStyle.dark,
             ),
             textAlign: TextAlign.center,
           ),
+          10.verticalSpace,
+          Text(
+            'Anda harus login terlebih dahulu untuk ke halaman checkout',
+            style: GoogleTextStyle.fw400.copyWith(
+              fontSize: 16.sp,
+              color: ColorStyle.grey,
+            ),
+            textAlign: TextAlign.center,
+          ),
           14.verticalSpace,
           ButtonPrimaryCustom(
-            text: 'Login Untuk Melanjutkan',
+            text: 'Login',
             onTap: () {
               Get.back();
               Get.toNamed(Routes.loginRoute);

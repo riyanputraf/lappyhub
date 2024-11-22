@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lappyhub/features/login/controllers/login_controller.dart';
 import 'package:lappyhub/features/profile/controllers/profile_controller.dart';
+import 'package:lappyhub/features/profile/view/components/illustration_not_login_component.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
 
 import '../../../../configs/routes/route.dart';
@@ -38,24 +39,25 @@ class ProfileScreen extends StatelessWidget {
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 8.verticalSpace,
-                ButtonPrimaryCustom(
-                  text: 'Logout',
-                  color: ColorStyle.danger,
-                  onTap: () async {
-                    await ProfileController.to.logout();
-                  },
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: ButtonPrimaryCustom(
+                    text: 'Logout',
+                    color: ColorStyle.danger,
+                    onTap: () async {
+                      await ProfileController.to.logout();
+                    },
+                  ),
                 ),
               ],
             ),
           );
         } else {
-          return Center(
-            child: ButtonPrimaryCustom(
-              text: 'Login disini',
-              onTap: () {
-                Get.toNamed(Routes.loginRoute);
-              },
-            ),
+          return IllustrationNotLoginComponent(
+            image: assetsConstant.notLoginImage,
+            onTap: () {
+              Get.toNamed(Routes.loginRoute);
+            },
           );
         }
       }),

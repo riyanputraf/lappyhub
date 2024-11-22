@@ -34,13 +34,13 @@ class DetailLaptopController extends GetxController{
     }
   }
 
-  Future<void> showConfirmLoginDialog() async {
+  Future<void> showConfirmLoginDialog(String image) async {
     await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       radius: 30,
       backgroundColor: ColorStyle.softGrey,
-      content: ConfirmLoginDialogComponent(),
+      content: ConfirmLoginDialogComponent(image: image),
     );
 
   }

@@ -76,7 +76,9 @@ class DetailLaptopScreen extends StatelessWidget {
                         },
                       );
                     } else {
-                      DetailLaptopController.to.showConfirmLoginDialog();
+                      DetailLaptopController.to.showConfirmLoginDialog(
+                        assetsConstant.notLoginImage,
+                      );
                     }
                   },
                 ),

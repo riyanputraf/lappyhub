@@ -7,4 +7,5 @@ class HomeAssetsConstant {
   final String messageIcon = 'assets/icons/message_icon.svg';
   final String searchNotFoundImage = 'assets/images/search_not_found_image.png';
   final String illustrationSearchImage = 'assets/images/illustration_search_image.png';
+  final String notLoginImage = 'assets/images/not_login_image.png';
 }
