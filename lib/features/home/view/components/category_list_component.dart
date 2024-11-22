@@ -6,6 +6,8 @@ import 'package:lappyhub/features/home/models/category_model.dart';
 import 'package:lappyhub/features/home/view/components/category_card_component.dart';
 import 'package:lappyhub/shared/widgets/shimmer_custom.dart';
 
+import '../../../../configs/routes/route.dart';
+
 class CategoryList extends StatelessWidget {
   const CategoryList({
     super.key,
@@ -41,6 +43,14 @@ class CategoryList extends StatelessWidget {
             return CategoryCardComponent(
               name: category.name,
               iconPath: category.icon,
+              onTap: () {
+                Get.toNamed(
+                  Routes.homeCategoryLaptopDetailRoute,
+                  arguments: {
+                    'categoryName': category.name,
+                  },
+                );
+              },
             );
           },
         ),

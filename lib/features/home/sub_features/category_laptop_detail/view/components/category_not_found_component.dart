@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lappyhub/shared/styles/color_style.dart';
-import 'package:lappyhub/shared/styles/google_text_style.dart';
 
-class SearchNotFoundComponent extends StatelessWidget {
-  const SearchNotFoundComponent({
+import '../../../../../../shared/styles/color_style.dart';
+import '../../../../../../shared/styles/google_text_style.dart';
+
+class CategoryNotFoundComponent extends StatelessWidget {
+  const CategoryNotFoundComponent({
     super.key,
     required this.image,
   });
@@ -25,7 +26,7 @@ class SearchNotFoundComponent extends StatelessWidget {
           ),
           10.verticalSpace,
           Text(
-            'Laptop Tidak Ditemukan',
+            'Category Laptop Tidak Ditemukan',
             style: GoogleTextStyle.fw400.copyWith(
               fontSize: 20.sp,
               color: ColorStyle.dark,

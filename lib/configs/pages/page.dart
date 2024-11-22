@@ -10,6 +10,8 @@ import 'package:lappyhub/features/checkout/sub_features/success_checkout/view/ui
 import 'package:lappyhub/features/checkout/view/ui/checkout_screen.dart';
 import 'package:lappyhub/features/home/bindings/detail_laptop_binding.dart';
 import 'package:lappyhub/features/home/bindings/home_binding.dart';
+import 'package:lappyhub/features/home/sub_features/category_laptop_detail/bindings/category_laptop_detail_binding.dart';
+import 'package:lappyhub/features/home/sub_features/category_laptop_detail/view/ui/category_laptop_detail_screen.dart';
 import 'package:lappyhub/features/home/sub_features/search_laptop/bindings/search_laptop_binding.dart';
 import 'package:lappyhub/features/home/sub_features/search_laptop/view/ui/search_laptop_screen.dart';
 import 'package:lappyhub/features/home/view/ui/detail_laptop_screen.dart';
@@ -111,6 +113,12 @@ abstract class Pages {
       name: Routes.homeSearchLaptopRoute,
       page: () => SearchLaptopScreen(),
       binding: SearchLaptopBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.homeCategoryLaptopDetailRoute,
+      page: () => CategoryLaptopDetailScreen(),
+      binding: CategoryLaptopDetailBinding(),
       transition: Transition.fadeIn,
     ),
   ];
