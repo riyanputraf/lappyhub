@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lappyhub/features/login/controllers/login_controller.dart';
 import 'package:lappyhub/features/profile/controllers/profile_controller.dart';
 import 'package:lappyhub/features/profile/view/components/illustration_not_login_component.dart';
+import 'package:lappyhub/features/profile/view/components/profile_app_bar_component.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
 
 import '../../../../configs/routes/route.dart';
@@ -20,6 +21,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorStyle.softGrey,
+      appBar: ProfileAppBarComponent(
+        title: 'Profil',
+      ),
       body: Obx(() {
         if (LoginController.to.isLoggedIn.value) {
           return Center(
