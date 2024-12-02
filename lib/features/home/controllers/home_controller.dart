@@ -11,11 +11,6 @@ class HomeController extends GetxController {
 
   final assetsConstant = HomeAssetsConstant();
 
-  // List<Map<String, String>> get categories => [
-  //       {'name': 'Asus', 'icon': assetsConstant.asusIcon},
-  //       {'name': 'Apple', 'icon': assetsConstant.appleIcon},
-  //       {'name': 'Acer', 'icon': assetsConstant.acerIcon},
-  //     ];
 
   late final HomeRepository homeRepository;
 

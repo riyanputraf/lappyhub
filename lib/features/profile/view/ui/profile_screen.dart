@@ -24,47 +24,49 @@ class ProfileScreen extends StatelessWidget {
       appBar: ProfileAppBarComponent(
         title: 'Profil',
       ),
-      body: Obx(() {
-        if (LoginController.to.isLoggedIn.value) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(
-                      HiveService.get<String>('avatar') ??
-                          'avatar'), // Avatar dari Hive
-                ),
-                16.verticalSpace,
-                Text(
-                  HiveService.get<String>('name') ?? 'name',
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                8.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: ButtonPrimaryCustom(
-                    text: 'Logout',
-                    color: ColorStyle.danger,
-                    onTap: () async {
-                      await ProfileController.to.logout();
-                    },
+      body: SingleChildScrollView(
+        child: Obx(() {
+          if (LoginController.to.isLoggedIn.value) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(
+                        HiveService.get<String>('avatar') ??
+                            'avatar'), // Avatar dari Hive
                   ),
-                ),
-              ],
-            ),
-          );
-        } else {
-          return IllustrationNotLoginComponent(
-            image: assetsConstant.notLoginImage,
-            onTap: () {
-              Get.toNamed(Routes.loginRoute);
-            },
-          );
-        }
-      }),
+                  16.verticalSpace,
+                  Text(
+                    HiveService.get<String>('name') ?? 'name',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  8.verticalSpace,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: ButtonPrimaryCustom(
+                      text: 'Logout',
+                      color: ColorStyle.danger,
+                      onTap: () async {
+                        await ProfileController.to.logout();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return IllustrationNotLoginComponent(
+              image: assetsConstant.notLoginImage,
+              onTap: () {
+                Get.toNamed(Routes.loginRoute);
+              },
+            );
+          }
+        }),
+      ),
     );
   }
 }

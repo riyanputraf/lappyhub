@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
               36.verticalSpace,
 
               /// List Kategori
-              SectionHeaderCustom(title: 'Kategori'),
+              SectionHeaderCustom(title: 'Merek'),
               CategoryList(
                 listCategory: HomeController.to.categories,
               ),
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               30.verticalSpace,
 
               /// List Laptop (Vertical Scroll)
-              SectionHeaderCustom(title: 'List Laptop'),
+              SectionHeaderCustom(title: 'Laptop Lainnya'),
               LaptopListComponent(
                 laptop: HomeController.to.listLaptops,
               ),

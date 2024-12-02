@@ -18,7 +18,7 @@ class IllustrationNotLoginComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 80.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
