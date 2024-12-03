@@ -51,7 +51,7 @@ class OrderScreen extends StatelessWidget {
                       itemCount: 10,
                       axis: Axis.vertical,
                       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 0),
-                      height: 98.h,
+                      height: 130.h,
                       paddingShimmer: EdgeInsets.only(bottom: 16.h),
                     ),
                   ],

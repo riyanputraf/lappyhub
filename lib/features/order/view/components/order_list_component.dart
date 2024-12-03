@@ -36,6 +36,7 @@ class OrderListComponent extends StatelessWidget {
               itemBuilder: (context, index) {
                 return OrderCardComponent(
                   laptop: orderList[index].laptop,
+                  order: orderList[index],
                   onTap: () {
                     // Get.toNamed('${Routes.orderRoute}/${laptop[index].id}');
                   },
