@@ -85,8 +85,12 @@ class OrderSummaryComponent extends StatelessWidget {
                   title: 'Biaya Jasa',
                   value: CurrencyFormat.convertToIdr(serviceFee, 0),
                 ),
+                Divider(
+                  thickness: 1,
+                  color: ColorStyle.grey.withOpacity(0.25),
+                ),
                 OrderSummaryItemComponent(
-                  title: 'Grand Total Harga',
+                  title: 'Total Harga',
                   value: CurrencyFormat.convertToIdr(grandTotalPrice, 0),
                   valueStyle: GoogleTextStyle.fw600.copyWith(
                     fontSize: 16.sp,

@@ -2,6 +2,7 @@ import 'package:lappyhub/features/home/models/laptop_detail_model.dart';
 
 class CheckoutOrderModel {
   final String userId;
+  final String orderDate;
   final String startDate;
   final String endDate;
   final int subPrice;
@@ -15,6 +16,7 @@ class CheckoutOrderModel {
 
   CheckoutOrderModel({
     required this.userId,
+    required this.orderDate,
     required this.startDate,
     required this.endDate,
     required this.subPrice,
@@ -30,6 +32,7 @@ class CheckoutOrderModel {
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
+      'order_date': orderDate,
       'start_date': startDate,
       'end_date': endDate,
       'sub_price': subPrice,

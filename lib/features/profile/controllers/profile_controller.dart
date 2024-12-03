@@ -19,6 +19,11 @@ class ProfileController extends GetxController {
     super.onInit();
     profileRepository = ProfileRepository();
 
+    // Kondisi jika sudah login
+    if (HiveService.isUserLoggedIn()) {
+      isLogin.value = true;
+    }
+
     ever(HiveService.isLoggedInStatus, (isLoggedIn) {
       if (isLoggedIn) {
         isLogin.value = true;

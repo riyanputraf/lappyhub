@@ -27,7 +27,7 @@ class HiveService extends GetxService {
     );
   }
 
-  static final isLoggedInStatus = RxBool(box.get('isLogin') == true);
+  static final isLoggedInStatus = RxBool(isLoggedIn());
   static void monitorLoginStatus() {
     box.watch(key: 'isLogin').listen((event) {
       isLoggedInStatus.value = event.value == true;

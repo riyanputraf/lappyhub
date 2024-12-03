@@ -61,7 +61,7 @@ class DropdownRentNeedComponent extends StatelessWidget {
                             color: ColorStyle.dark,
                           )
                         : GoogleTextStyle.fw400.copyWith(
-                            color: ColorStyle.grey,
+                            color: ColorStyle.dark.withOpacity(0.5),
                             fontSize: 16.sp,
                           ),
                   ),

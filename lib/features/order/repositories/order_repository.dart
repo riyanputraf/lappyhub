@@ -18,9 +18,18 @@ class OrderRepository {
     dio = DioService.dioCall();
   }
 
-  Future<List<OrderModel>> fetchOrdersByUserId(String userId) async {
+  Future<List<OrderModel>> fetchOrdersByUserId(String userId,
+      {int page = 1}) async {
     try {
-      final response = await dio.get('/users/$userId/orders');
+      final response = await dio.get(
+        '/users/$userId/orders',
+        queryParameters: {
+          'page': page,
+          'limit': 10,
+          'orderBy': 'order_date',
+          'order': 'desc',
+        },
+      );
 
       if (response.statusCode == 200) {
         final data = response.data['data'] as List;

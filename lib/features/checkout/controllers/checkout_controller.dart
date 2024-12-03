@@ -70,6 +70,7 @@ class CheckoutController extends GetxController {
     try {
       final order = CheckoutOrderModel(
         userId: userId,
+        orderDate: DateTime.now().toString(),
         startDate: startDate.value.toString(),
         endDate: endDate.value.toString(),
         subPrice: subTotalPrice.value,

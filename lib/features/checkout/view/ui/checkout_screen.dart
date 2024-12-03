@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -77,6 +79,7 @@ class CheckoutScreen extends StatelessWidget {
         child: ButtonPrimaryCustom(
           text: 'Checkout Sekarang',
           onTap: () {
+            log('Date time Now: ${DateTime.now().toString()}');
             String? idUser = HiveService.get<String>('id');
             if (idUser != null) {
               CheckoutController.to.createOrder(
