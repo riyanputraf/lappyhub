@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lappyhub/features/order/view/components/empty_order_illustration_component.dart';
 import 'package:lappyhub/features/order/view/components/illustration_not_login_component.dart';
 import 'package:lappyhub/features/order/view/components/order_app_bar_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 
 import '../../../../configs/routes/route.dart';
-import '../../../login/controllers/login_controller.dart';
+import '../../../../shared/widgets/shimmer_custom.dart';
 import '../../constants/order_assets_constant.dart';
 import '../../controllers/order_controller.dart';
 import '../components/order_list_component.dart';
@@ -25,7 +27,7 @@ class OrderScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Obx(
           () {
-            if (LoginController.to.isLoggedIn.value == false) {
+            if (OrderController.to.isLogin.value == false) {
               return IllustrationNotLoginComponent(
                 image: assetsConstant.notLoginImage,
                 onTap: () {
@@ -33,7 +35,26 @@ class OrderScreen extends StatelessWidget {
                 },
               );
             }
-            OrderController.to.fetchOrders();
+            if (OrderController.to.isLoadingLaptops.value == 'loading') {
+              return Column(
+                children: [
+                  30.verticalSpace,
+                  ShimmerCustom(
+                    itemCount: 10,
+                    axis: Axis.vertical,
+                    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 0),
+                    height: 98.h,
+                    paddingShimmer: EdgeInsets.only(bottom: 16.h),
+                  ),
+                ],
+              );
+            }
+            if (OrderController.to.orderList.isEmpty) {
+              return EmptyOrderIllustrationComponent(
+                image: assetsConstant.emptyOrderImage,
+              );
+            }
+
             return Column(
               children: [
                 OrderListComponent(

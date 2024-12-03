@@ -19,6 +19,7 @@ class HiveService extends GetxService {
     await box.put("pin", user.pin);
     await box.put("password", user.password);
     await box.put("isLogin", true);
+    isLoggedInStatus.value = true;
 
     /// Log id user
     await FirebaseAnalytics.instance.setUserId(
@@ -26,9 +27,26 @@ class HiveService extends GetxService {
     );
   }
 
+  static final isLoggedInStatus = RxBool(box.get('isLogin') == true);
+  static void monitorLoginStatus() {
+    box.watch(key: 'isLogin').listen((event) {
+      isLoggedInStatus.value = event.value == true;
+    });
+  }
+  static bool isUserLoggedIn() {
+    return isLoggedInStatus.value;
+  }
+
   /// Fungsi untuk mengecek apakah user masih login
   static bool isLoggedIn() {
     return box.get('isLogin') == true;
+  }
+  static Future<void> setIsLoggedIn(bool isLogin) async => await box.put(
+    "isLogin",
+    isLogin,
+  );
+  static Stream<bool> isLoggedInStream() {
+    return box.watch(key: 'isLogin').map((event) => event.value == true);
   }
 
   /// Fungsi generic untuk mengambil data dari Hive
@@ -40,5 +58,6 @@ class HiveService extends GetxService {
   static Future deleteAuth() async {
     box.clear();
     box.put('isLogin', false);
+    isLoggedInStatus.value = false;
   }
 }

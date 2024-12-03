@@ -12,12 +12,27 @@ class OrderController extends GetxController {
   var orderList = <OrderModel>[].obs;
   var isLoadingLaptops = 'idle'.obs;
   var isLoadingMore = 'idle'.obs;
+  var isLogin = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     orderRepository = OrderRepository();
-    // fetchOrders();
+
+    ever(HiveService.isLoggedInStatus, (isLoggedIn) {
+      if (isLoggedIn) {
+        fetchOrders();
+        isLogin.value = true;
+      } else {
+        orderList.clear();
+        isLogin.value = false;
+      }
+    });
+
+    // Kondisi jika sudah login
+    if (HiveService.isUserLoggedIn()) {
+      fetchOrders();
+    }
   }
 
   Future<void> fetchOrders() async {

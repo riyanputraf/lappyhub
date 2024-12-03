@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lappyhub/shared/bindings/global_binding.dart';
+import 'package:lappyhub/utils/services/hive_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:lappyhub/configs/routes/route.dart';
 
@@ -24,6 +25,8 @@ void main() async {
 
       await Hive.initFlutter();
       await Hive.openBox('lappyHub');
+      // Monitor perubahan login status
+      HiveService.monitorLoginStatus();
 
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
