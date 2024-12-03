@@ -10,11 +10,10 @@ class MainBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(MainController());
-    Get.put(LoginController());
     // Lazy load untuk halaman lain
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<OrderController>(() => OrderController());
     Get.lazyPut<ProfileController>(() => ProfileController());
-    // Get.lazyPut<LoginController>(() => LoginController());
+    Get.lazyPut<LoginController>(() => LoginController());
   }
 }

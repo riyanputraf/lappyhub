@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../shared/styles/color_style.dart';
 import '../../../utils/services/hive_service.dart';
-import '../../login/controllers/login_controller.dart';
 import '../repositories/profile_repository.dart';
 
 class ProfileController extends GetxController {
@@ -13,12 +12,20 @@ class ProfileController extends GetxController {
 
   late final ProfileRepository profileRepository;
 
-  var isLoggedIn = HiveService.isLoggedIn().obs;
+  var isLogin = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     profileRepository = ProfileRepository();
+
+    ever(HiveService.isLoggedInStatus, (isLoggedIn) {
+      if (isLoggedIn) {
+        isLogin.value = true;
+      } else {
+        isLogin.value = false;
+      }
+    });
   }
 
   Future<void> logout() async {
@@ -32,15 +39,14 @@ class ProfileController extends GetxController {
 
     try {
       await profileRepository.logout();
-      LoginController.to.isLoggedIn.value = false; // Update status login
       HiveService.setIsLoggedIn(false);
-      isLoggedIn.value = false;
       update();
       EasyLoading.instance.backgroundColor = ColorStyle.success;
       EasyLoading.showSuccess('Logout Success');
-    } catch (e) {
+    } catch (e, stackTrace) {
       EasyLoading.dismiss();
       log('Logout Error: $e');
+      log('Stacktrace Logout Error: $stackTrace');
     }
   }
 }
