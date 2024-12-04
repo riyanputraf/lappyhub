@@ -42,7 +42,7 @@ class OrderCardComponent extends StatelessWidget {
                 colorFilter: ColorFilter.mode(ColorStyle.white, BlendMode.modulate),
                 child: CachedNetworkImage(
                   imageUrl: laptop.image,
-                  height: 82.h,
+                  height: 95.h,
                   width: 107.w,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Shimmer.fromColors(

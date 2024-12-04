@@ -7,7 +7,7 @@ import 'package:lappyhub/features/checkout/controllers/checkout_controller.dart'
 import 'package:lappyhub/features/checkout/view/components/checkout_laptop_card_component.dart';
 import 'package:lappyhub/features/checkout/view/components/dropdown_rent_need_component.dart';
 import 'package:lappyhub/features/checkout/view/components/form_checkout_component.dart';
-import 'package:lappyhub/features/checkout/view/components/order_summary_component.dart';
+import 'package:lappyhub/features/checkout/view/components/summary_checkout_component.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/widgets/app_bar_custom.dart';
 import 'package:lappyhub/shared/widgets/button_primary_custom.dart';
@@ -54,7 +54,7 @@ class CheckoutScreen extends StatelessWidget {
             20.verticalSpace,
             Obx(
               () {
-                return OrderSummaryComponent(
+                return SummaryCheckoutComponent(
                   title: 'Rincian Pemesanan',
                   duration: CheckoutController.to.durationDays.value,
                   startDate: CheckoutController.to.startDate.value,

@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lappyhub/shared/styles/color_style.dart';
 import 'package:lappyhub/shared/styles/google_text_style.dart';
 
-class OrderSummaryItemComponent extends StatelessWidget {
-  const OrderSummaryItemComponent({
+class SummaryItemCheckoutComponent extends StatelessWidget {
+  const SummaryItemCheckoutComponent({
     super.key,
     required this.title,
     required this.value,

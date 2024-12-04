@@ -1,34 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:lappyhub/features/checkout/view/components/order_summary_item_component.dart';
-import 'package:lappyhub/features/home/models/laptop_detail_model.dart';
+import 'package:lappyhub/features/order/sub_features/detail_order/view/components/summary_item_detail_order_component.dart';
 
-import '../../../../shared/styles/color_style.dart';
-import '../../../../shared/styles/google_text_style.dart';
-import '../../../../shared/widgets/currency_format_custom.dart';
+import '../../../../../../shared/styles/color_style.dart';
+import '../../../../../../shared/styles/google_text_style.dart';
+import '../../../../../../shared/widgets/currency_format_custom.dart';
+import '../../models/detail_order_model.dart';
 
-class OrderSummaryComponent extends StatelessWidget {
-  const OrderSummaryComponent({
+class SummaryDetailOrderComponent extends StatelessWidget {
+  const SummaryDetailOrderComponent({
     super.key,
-    required this.duration,
     required this.title,
-    required this.startDate,
-    required this.endDate,
-    required this.laptop,
-    required this.subTotalPrice,
-    required this.grandTotalPrice,
-    required this.serviceFee,
+    this.detailOrder,
   });
 
-  final int duration;
-  final int serviceFee;
-  final int subTotalPrice;
-  final int grandTotalPrice;
   final String title;
-  final DateTime? startDate;
-  final DateTime? endDate;
-  final LaptopDetailModel? laptop;
+  final DetailOrderModel? detailOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -54,44 +42,44 @@ class OrderSummaryComponent extends StatelessWidget {
             ),
             child: Column(
               children: [
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Harga',
-                  value:
-                      CurrencyFormat.convertToIdr(int.parse(laptop!.price), 0),
+                  value: CurrencyFormat.convertToIdr(
+                      int.parse(detailOrder!.laptop.price), 0),
                   subTitle: '/hari',
                 ),
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Tanggal Mulai',
-                  value: startDate != null
-                      ? DateFormat('dd MMM yyyy').format(startDate!)
-                      : '-',
+                  value: DateFormat('dd MMM yyyy')
+                      .format(DateTime.parse(detailOrder!.startDate)),
                 ),
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Tanggal Berakhir',
-                  value: endDate != null
-                      ? DateFormat('dd MMM yyyy').format(endDate!)
-                      : '-',
+                  value: DateFormat('dd MMM yyyy')
+                      .format(DateTime.parse(detailOrder!.endDate)),
                 ),
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Durasi',
-                  value: duration.toString(),
+                  value: detailOrder!.duration.toString(),
                   subTitle: ' hari',
                 ),
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Sub Total Harga',
-                  value: CurrencyFormat.convertToIdr(subTotalPrice, 0),
+                  value: CurrencyFormat.convertToIdr(detailOrder!.subPrice, 0),
                 ),
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Biaya Jasa',
-                  value: CurrencyFormat.convertToIdr(serviceFee, 0),
+                  value:
+                      CurrencyFormat.convertToIdr(detailOrder!.serviceFee, 0),
                 ),
                 Divider(
                   thickness: 1,
                   color: ColorStyle.grey.withOpacity(0.25),
                 ),
-                OrderSummaryItemComponent(
+                SummaryItemDetailOrderComponent(
                   title: 'Total Harga',
-                  value: CurrencyFormat.convertToIdr(grandTotalPrice, 0),
+                  value:
+                      CurrencyFormat.convertToIdr(detailOrder!.grandPrice, 0),
                   valueStyle: GoogleTextStyle.fw600.copyWith(
                     fontSize: 16.sp,
                     color: ColorStyle.primary,

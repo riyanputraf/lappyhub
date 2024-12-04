@@ -7,6 +7,7 @@ abstract class Routes {
   static const String homeRoute = '/home';
   static const String detailLaptopRoute = '/home/:laptopId';
   static const String orderRoute = '/order';
+  static const String detailOrderRoute = '/order/:orderId';
   static const String chatRoute = '/chat';
   static const String profileRoute = '/profile';
   static const String checkoutRoute = '/checkout';
@@ -16,4 +17,5 @@ abstract class Routes {
   static const String homeSearchLaptopRoute = '/home_search_laptop';
   static const String homeCategoryLaptopDetailRoute =
       '/home_category_laptop_detail';
+
 }

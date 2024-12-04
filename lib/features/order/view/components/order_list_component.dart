@@ -38,7 +38,7 @@ class OrderListComponent extends StatelessWidget {
                   laptop: orderList[index].laptop,
                   order: orderList[index],
                   onTap: () {
-                    // Get.toNamed('${Routes.orderRoute}/${laptop[index].id}');
+                    Get.toNamed('${Routes.orderRoute}/${orderList[index].id}');
                   },
                 );
               },

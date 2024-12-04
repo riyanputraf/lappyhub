@@ -21,6 +21,8 @@ import 'package:lappyhub/features/login/view/ui/login_screen.dart';
 import 'package:lappyhub/features/main/bindings/main_binding.dart';
 import 'package:lappyhub/features/main/view/ui/main_screen.dart';
 import 'package:lappyhub/features/order/bindings/order_binding.dart';
+import 'package:lappyhub/features/order/sub_features/detail_order/bindings/detail_order_binding.dart';
+import 'package:lappyhub/features/order/sub_features/detail_order/view/ui/detail_order_screen.dart';
 import 'package:lappyhub/features/order/view/ui/order_screen.dart';
 import 'package:lappyhub/features/profile/bindings/profile_binding.dart';
 import 'package:lappyhub/features/profile/view/ui/profile_screen.dart';
@@ -119,6 +121,12 @@ abstract class Pages {
       name: Routes.homeCategoryLaptopDetailRoute,
       page: () => CategoryLaptopDetailScreen(),
       binding: CategoryLaptopDetailBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.detailOrderRoute,
+      page: () => DetailOrderScreen(),
+      binding: DetailOrderBinding(),
       transition: Transition.fadeIn,
     ),
   ];
