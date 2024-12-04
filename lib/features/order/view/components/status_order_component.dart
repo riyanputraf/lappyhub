@@ -31,7 +31,7 @@ class StatusOrderComponent extends StatelessWidget {
         iconColor = ColorStyle.secondary;
         break;
       case 2:
-        statusText = "Sukses";
+        statusText = "Selesai";
         iconData = Icons.check_circle;
         iconColor = ColorStyle.success;
         break;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lappyhub/features/order/view/components/dropdown_status_order_component.dart';
 import 'package:lappyhub/features/order/view/components/empty_order_illustration_component.dart';
 import 'package:lappyhub/features/order/view/components/illustration_not_login_component.dart';
 import 'package:lappyhub/features/order/view/components/order_app_bar_component.dart';
@@ -11,6 +12,7 @@ import '../../../../configs/routes/route.dart';
 import '../../../../shared/widgets/shimmer_custom.dart';
 import '../../constants/order_assets_constant.dart';
 import '../../controllers/order_controller.dart';
+import '../components/not_found_status_illustration_component.dart';
 import '../components/order_list_component.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -46,6 +48,7 @@ class OrderScreen extends StatelessWidget {
               if (OrderController.to.isLoadingLaptops.value == 'loading') {
                 return Column(
                   children: [
+                    DropdownStatusOrderComponent(),
                     30.verticalSpace,
                     ShimmerCustom(
                       itemCount: 10,
@@ -53,6 +56,17 @@ class OrderScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 0),
                       height: 130.h,
                       paddingShimmer: EdgeInsets.only(bottom: 16.h),
+                    ),
+                  ],
+                );
+              }
+              if (OrderController.to.orderList.isEmpty &&
+                  OrderController.to.selectedStatus.value != null) {
+                return Column(
+                  children: [
+                    DropdownStatusOrderComponent(),
+                    NotFoundStatusIllustrationComponent(
+                      image: assetsConstant.notFoundStatusImage,
                     ),
                   ],
                 );
@@ -65,6 +79,7 @@ class OrderScreen extends StatelessWidget {
 
               return Column(
                 children: [
+                  DropdownStatusOrderComponent(),
                   OrderListComponent(
                     orderList: OrderController.to.orderList,
                   ),

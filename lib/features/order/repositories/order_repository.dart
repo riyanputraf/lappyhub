@@ -19,16 +19,22 @@ class OrderRepository {
   }
 
   Future<List<OrderModel>> fetchOrdersByUserId(String userId,
-      {int page = 1}) async {
+      {int page = 1, int? status}) async {
     try {
+      final queryParameters = {
+        'page': page,
+        'limit': 10,
+        'orderBy': 'order_date',
+        'order': 'desc',
+      };
+
+      if (status != null) {
+        queryParameters['status'] = status;
+      }
+
       final response = await dio.get(
         '/users/$userId/orders',
-        queryParameters: {
-          'page': page,
-          'limit': 10,
-          'orderBy': 'order_date',
-          'order': 'desc',
-        },
+        queryParameters: queryParameters,
       );
 
       if (response.statusCode == 200) {

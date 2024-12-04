@@ -19,6 +19,17 @@ class OrderController extends GetxController {
   var isLoadingMore = 'idle'.obs;
   var currentPage = 1;
 
+  var selectedStatus = Rxn<int?>();
+  // Status Options untuk Dropdown
+  final List<Map<String, dynamic>> statusOptions = [
+    {'label': 'Semua Status', 'value': null},
+    {'label': 'Sedang Diproses', 'value': 0},
+    {'label': 'Dapat Diambil', 'value': 1},
+    {'label': 'Selesai', 'value': 2},
+    {'label': 'Dibatalkan', 'value': 3},
+    {'label': 'Not Found Status Test', 'value': 4},
+  ];
+
   // Refresh Controller
   late final RefreshController refreshController;
 
@@ -49,7 +60,7 @@ class OrderController extends GetxController {
 
   }
 
-  Future<void> fetchOrders({required int page}) async {
+  Future<void> fetchOrders({required int page, int? status}) async {
     if (isLoadingLaptops.value == 'loading') return;
 
     try {
@@ -59,7 +70,7 @@ class OrderController extends GetxController {
       } else {
         isLoadingMore.value = 'loading';
       }
-      final data = await orderRepository.fetchOrdersByUserId(userId.toString(), page: page);
+      final data = await orderRepository.fetchOrdersByUserId(userId.toString(), page: page, status: status);
 
       if (page == 1) {
         orderList.value = data;
@@ -81,7 +92,7 @@ class OrderController extends GetxController {
       currentPage = 1;
       refreshController.resetNoData(); // Reset refresh
       await Future.wait([
-        fetchOrders(page: 1),
+        fetchOrders(page: 1, status: selectedStatus.value),
       ]);
       hasMoreData.value = true; // Reset status data
       isLoadingMore.value = 'idle';
@@ -99,10 +110,16 @@ class OrderController extends GetxController {
     }
 
     try {
-      await fetchOrders(page: currentPage + 1);
+      await fetchOrders(page: currentPage + 1, status: selectedStatus.value);
       refreshController.loadComplete(); // Selesaikan load more
     } catch (e) {
       refreshController.loadFailed(); // Gagal load more
     }
+  }
+
+  // Ubah status dan fetch data
+  void updateStatus(int? status) {
+    selectedStatus.value = status;
+    fetchOrders(page: 1, status: status);
   }
 }

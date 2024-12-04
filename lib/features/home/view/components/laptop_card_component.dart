@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lappyhub/features/home/models/laptop_model.dart';
 import 'package:lappyhub/shared/styles/google_text_style.dart';
@@ -71,6 +72,20 @@ class LaptopCardComponent extends StatelessWidget {
                       fontSize: 16.sp,
                       color: ColorStyle.dark,
                     ),
+                  ),
+                  4.verticalSpace,
+                  RatingBar.builder(
+                    initialRating: laptop.rating.toDouble(),
+                    itemPadding: const EdgeInsets.all(0),
+                    itemSize: 16.r,
+                    unratedColor: Colors.grey[300],
+                    allowHalfRating: true,
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: ColorStyle.warning,
+                    ),
+                    ignoreGestures: true,
+                    onRatingUpdate: (value) {},
                   ),
                   4.verticalSpace,
                   Text(
