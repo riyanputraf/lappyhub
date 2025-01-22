@@ -17,5 +17,6 @@ abstract class Routes {
   static const String homeSearchLaptopRoute = '/home_search_laptop';
   static const String homeCategoryLaptopDetailRoute =
       '/home_category_laptop_detail';
+  static const String editProfileRoute = '/edit_profile';
 
 }

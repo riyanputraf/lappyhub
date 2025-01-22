@@ -4,4 +4,5 @@ class ProfileAssetsConstant {
   final String ratingIcon = 'assets/icons/rating_icon.svg';
   final String deviceIcon = 'assets/icons/device_icon.svg';
   final String globeIcon = 'assets/icons/globe_icon.svg';
+  final String emailIcon = 'assets/icons/email_icon.svg';
 }

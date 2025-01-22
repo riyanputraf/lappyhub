@@ -8,10 +8,14 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.onBackPressed,
+    this.hasAction = false,
+    this.onActionPressed,
   });
 
   final String title;
   final VoidCallback? onBackPressed;
+  final VoidCallback? onActionPressed;
+  final bool hasAction;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,27 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ),
+        actions: hasAction
+            ? [
+                GestureDetector(
+                  onTap: onActionPressed,
+                  child: Container(
+                    height: 60.h,
+                    width: 60.w,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.check,
+                      size: 24.r,
+                      color: ColorStyle.success,
+                    ),
+                  ),
+                ),
+              ]
+            : null,
       ),
     );
   }

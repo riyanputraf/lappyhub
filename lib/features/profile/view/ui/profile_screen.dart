@@ -54,6 +54,9 @@ class ProfileScreen extends StatelessWidget {
                         ProfileItemComponent(
                           name: 'Edit Profil',
                           icon: assetsConstant.personIcon,
+                          onTap: (){
+                            Get.toNamed(Routes.editProfileRoute);
+                          },
                         ),
                         20.verticalSpace,
                         ProfileItemComponent(

@@ -25,6 +25,8 @@ import 'package:lappyhub/features/order/sub_features/detail_order/bindings/detai
 import 'package:lappyhub/features/order/sub_features/detail_order/view/ui/detail_order_screen.dart';
 import 'package:lappyhub/features/order/view/ui/order_screen.dart';
 import 'package:lappyhub/features/profile/bindings/profile_binding.dart';
+import 'package:lappyhub/features/profile/sub_features/edit_profile/bindings/edit_profile_binding.dart';
+import 'package:lappyhub/features/profile/sub_features/edit_profile/view/ui/edit_profile_screen.dart';
 import 'package:lappyhub/features/profile/view/ui/profile_screen.dart';
 import 'package:lappyhub/features/register/bindings/register_binding.dart';
 import 'package:lappyhub/features/register/view/ui/register_screen.dart';
@@ -127,6 +129,12 @@ abstract class Pages {
       name: Routes.detailOrderRoute,
       page: () => DetailOrderScreen(),
       binding: DetailOrderBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.editProfileRoute,
+      page: () => EditProfileScreen(),
+      binding: EditProfileBinding(),
       transition: Transition.fadeIn,
     ),
   ];

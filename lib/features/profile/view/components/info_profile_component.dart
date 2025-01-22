@@ -15,7 +15,7 @@ class InfoProfileComponent extends StatelessWidget {
           radius: 25,
           backgroundImage: NetworkImage(
             HiveService.get<String>('avatar') ?? 'avatar',
-          ), // Avatar dari Hive
+          ),
         ),
         const SizedBox(width: 10),
         Column(
