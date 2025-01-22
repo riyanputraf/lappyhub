@@ -10,6 +10,8 @@ import '../../../../configs/routes/route.dart';
 import '../../../../shared/styles/color_style.dart';
 import '../../../../utils/services/hive_service.dart';
 import '../../constants/profile_assets_constant.dart';
+import '../components/info_profile_component.dart';
+import '../components/profile_item_component.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -24,45 +26,66 @@ class ProfileScreen extends StatelessWidget {
         title: 'Profil',
       ),
       body: SingleChildScrollView(
-        child: Obx(() {
-          if (ProfileController.to.isLogin.value) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(
-                      HiveService.get<String>('avatar') ??
-                          'avatar'), // Avatar dari Hive
-                ),
-                16.verticalSpace,
-                Text(
-                  HiveService.get<String>('name') ?? 'name',
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                8.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: ButtonPrimaryCustom(
+        child: Obx(
+          () {
+            if (ProfileController.to.isLogin.value == false) {
+              return IllustrationNotLoginComponent(
+                image: assetsConstant.notLoginImage,
+                onTap: () {
+                  Get.toNamed(Routes.loginRoute);
+                },
+              );
+            }
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 30),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InfoProfileComponent(),
+                        40.verticalSpace,
+                        ProfileItemComponent(
+                          name: 'Edit Profil',
+                          icon: assetsConstant.personIcon,
+                        ),
+                        20.verticalSpace,
+                        ProfileItemComponent(
+                          name: 'Beri Penilaian',
+                          icon: assetsConstant.ratingIcon,
+                        ),
+                        20.verticalSpace,
+                        ProfileItemComponent(
+                          name: 'Tentang Aplikasi',
+                          icon: assetsConstant.deviceIcon,
+                        ),
+                        20.verticalSpace,
+                        ProfileItemComponent(
+                          name: 'Sosial Media Kami',
+                          icon: assetsConstant.globeIcon,
+                        ),
+                      ],
+                    ),
+                  ),
+                  20.verticalSpace,
+                  ButtonPrimaryCustom(
                     text: 'Logout',
                     color: ColorStyle.danger,
                     onTap: () async {
                       await ProfileController.to.logout();
                     },
                   ),
-                ),
-              ],
+                ],
+              ),
             );
-          } else {
-            return IllustrationNotLoginComponent(
-              image: assetsConstant.notLoginImage,
-              onTap: () {
-                Get.toNamed(Routes.loginRoute);
-              },
-            );
-          }
-        }),
+          },
+        ),
       ),
     );
   }

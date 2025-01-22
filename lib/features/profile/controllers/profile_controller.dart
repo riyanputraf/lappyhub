@@ -13,6 +13,8 @@ class ProfileController extends GetxController {
   late final ProfileRepository profileRepository;
 
   var isLogin = false.obs;
+  var name = ''.obs;
+  var email = ''.obs;
 
   @override
   void onInit() {
@@ -22,6 +24,8 @@ class ProfileController extends GetxController {
     // Kondisi jika sudah login
     if (HiveService.isUserLoggedIn()) {
       isLogin.value = true;
+      name.value =  HiveService.get<String>('name') ?? 'name';
+      email.value =  HiveService.get<String>('email') ?? 'email';
     }
 
     ever(HiveService.isLoggedInStatus, (isLoggedIn) {
