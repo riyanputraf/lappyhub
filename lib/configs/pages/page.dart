@@ -29,6 +29,8 @@ import 'package:lappyhub/features/profile/sub_features/about_app/bindings/about_
 import 'package:lappyhub/features/profile/sub_features/about_app/view/ui/about_app_screen.dart';
 import 'package:lappyhub/features/profile/sub_features/edit_profile/bindings/edit_profile_binding.dart';
 import 'package:lappyhub/features/profile/sub_features/edit_profile/view/ui/edit_profile_screen.dart';
+import 'package:lappyhub/features/profile/sub_features/rating/bindings/rating_binding.dart';
+import 'package:lappyhub/features/profile/sub_features/rating/view/ui/rating_screen.dart';
 import 'package:lappyhub/features/profile/sub_features/social_media/bindings/social_media_binding.dart';
 import 'package:lappyhub/features/profile/sub_features/social_media/view/ui/social_media_screen.dart';
 import 'package:lappyhub/features/profile/view/ui/profile_screen.dart';
@@ -151,6 +153,12 @@ abstract class Pages {
       name: Routes.aboutAppRoute,
       page: () => AboutAppScreen(),
       binding: AboutAppBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.ratingRoute,
+      page: () => RatingScreen(),
+      binding: RatingBinding(),
       transition: Transition.fadeIn,
     ),
   ];

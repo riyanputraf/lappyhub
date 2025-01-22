@@ -20,5 +20,6 @@ abstract class Routes {
   static const String editProfileRoute = '/edit_profile';
   static const String socialMediaRoute = '/social_media';
   static const String aboutAppRoute = '/about_app';
+  static const String ratingRoute = '/rating';
 
 }

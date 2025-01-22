@@ -62,6 +62,9 @@ class ProfileScreen extends StatelessWidget {
                         ProfileItemComponent(
                           name: 'Beri Penilaian',
                           icon: assetsConstant.ratingIcon,
+                          onTap: (){
+                            Get.toNamed(Routes.ratingRoute);
+                          },
                         ),
                         20.verticalSpace,
                         ProfileItemComponent(

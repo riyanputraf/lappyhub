@@ -8,7 +8,7 @@ import '../styles/google_text_style.dart';
 class TextFormFieldCustom extends StatelessWidget {
   const TextFormFieldCustom({
     super.key,
-    required this.icon,
+    this.icon,
     required this.hint,
     required this.controller,
     this.obsecure,
@@ -22,9 +22,10 @@ class TextFormFieldCustom extends StatelessWidget {
     this.initialValue,
     required this.label,
     this.suffixIcon,
+    this.maxLines,
   });
 
-  final String icon;
+  final String? icon;
   final String hint;
   final TextEditingController controller;
   final bool? obsecure;
@@ -38,6 +39,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final String? initialValue;
   final String label;
   final Widget? suffixIcon;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class TextFormFieldCustom extends StatelessWidget {
             keyboardType: keyboardType,
             obscureText: isPassword,
             maxLength: maxLength,
+            maxLines: maxLines,
             initialValue: initialValue,
             decoration: InputDecoration(
               enabled: enable,
@@ -79,7 +82,7 @@ class TextFormFieldCustom extends StatelessWidget {
               prefixIcon: UnconstrainedBox(
                 alignment: const Alignment(0.4, 0),
                 child: SvgPicture.asset(
-                  icon,
+                  icon ?? '',
                   width: 24.w,
                   height: 24.h,
                 ),
