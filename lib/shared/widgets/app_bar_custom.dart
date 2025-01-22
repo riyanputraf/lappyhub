@@ -32,7 +32,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: ColorStyle.softGrey,
+        backgroundColor: Colors.transparent,
         leading: GestureDetector(
           onTap: onBackPressed,
           child: Container(

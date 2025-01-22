@@ -27,6 +27,8 @@ import 'package:lappyhub/features/order/view/ui/order_screen.dart';
 import 'package:lappyhub/features/profile/bindings/profile_binding.dart';
 import 'package:lappyhub/features/profile/sub_features/edit_profile/bindings/edit_profile_binding.dart';
 import 'package:lappyhub/features/profile/sub_features/edit_profile/view/ui/edit_profile_screen.dart';
+import 'package:lappyhub/features/profile/sub_features/social_media/bindings/social_media_binding.dart';
+import 'package:lappyhub/features/profile/sub_features/social_media/view/ui/social_media_screen.dart';
 import 'package:lappyhub/features/profile/view/ui/profile_screen.dart';
 import 'package:lappyhub/features/register/bindings/register_binding.dart';
 import 'package:lappyhub/features/register/view/ui/register_screen.dart';
@@ -135,6 +137,12 @@ abstract class Pages {
       name: Routes.editProfileRoute,
       page: () => EditProfileScreen(),
       binding: EditProfileBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.socialMediaRoute,
+      page: () => SocialMediaScreen(),
+      binding: SocialMediaBinding(),
       transition: Transition.fadeIn,
     ),
   ];

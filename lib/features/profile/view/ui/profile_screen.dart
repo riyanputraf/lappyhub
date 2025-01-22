@@ -72,6 +72,9 @@ class ProfileScreen extends StatelessWidget {
                         ProfileItemComponent(
                           name: 'Sosial Media Kami',
                           icon: assetsConstant.globeIcon,
+                          onTap: (){
+                            Get.toNamed(Routes.socialMediaRoute);
+                          },
                         ),
                       ],
                     ),
