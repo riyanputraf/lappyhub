@@ -25,6 +25,8 @@ import 'package:lappyhub/features/order/sub_features/detail_order/bindings/detai
 import 'package:lappyhub/features/order/sub_features/detail_order/view/ui/detail_order_screen.dart';
 import 'package:lappyhub/features/order/view/ui/order_screen.dart';
 import 'package:lappyhub/features/profile/bindings/profile_binding.dart';
+import 'package:lappyhub/features/profile/sub_features/about_app/bindings/about_app_binding.dart';
+import 'package:lappyhub/features/profile/sub_features/about_app/view/ui/about_app_screen.dart';
 import 'package:lappyhub/features/profile/sub_features/edit_profile/bindings/edit_profile_binding.dart';
 import 'package:lappyhub/features/profile/sub_features/edit_profile/view/ui/edit_profile_screen.dart';
 import 'package:lappyhub/features/profile/sub_features/social_media/bindings/social_media_binding.dart';
@@ -143,6 +145,12 @@ abstract class Pages {
       name: Routes.socialMediaRoute,
       page: () => SocialMediaScreen(),
       binding: SocialMediaBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: Routes.aboutAppRoute,
+      page: () => AboutAppScreen(),
+      binding: AboutAppBinding(),
       transition: Transition.fadeIn,
     ),
   ];

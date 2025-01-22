@@ -67,6 +67,9 @@ class ProfileScreen extends StatelessWidget {
                         ProfileItemComponent(
                           name: 'Tentang Aplikasi',
                           icon: assetsConstant.deviceIcon,
+                          onTap: (){
+                            Get.toNamed(Routes.aboutAppRoute);
+                          },
                         ),
                         20.verticalSpace,
                         ProfileItemComponent(

@@ -8,7 +8,7 @@ class SocialMediaBodyComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InAppWebView(
       initialUrlRequest: URLRequest(
-        url: WebUri('https://www.instagram.com/amsewalaptop_malang/'),
+        url: WebUri('https://asani.co.id/sewa-laptop-malang/'),
       ),
     );
   }

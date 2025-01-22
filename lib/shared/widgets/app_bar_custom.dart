@@ -22,6 +22,22 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24.w),
       child: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(12.r),
+          ),
+        ),
+        flexibleSpace: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(12.r),
+            ),
+            color: Colors.transparent,
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        clipBehavior: Clip.none,
         scrolledUnderElevation: 0,
         title: Text(
           title,
